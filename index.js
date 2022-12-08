@@ -1,12 +1,61 @@
 const express = require('express');
-const port = 3000;
-var orm = require('orm');
 var app = express();
+const { Sequelize } = require('sequelize');
+const port = 7800;
+//var orm = require('orm');
 
 require('dotenv').config();
 
 const path = require('path');
-const portailRoutes = require('./routes/portail.routes')
+const portailRoutes = require('./routes/portail.routes');
+
+'use strict';
+
+
+const db = {};
+const DB = process.env.DB_NAME;
+const USER = 'eleve';
+const PASSWORD = 'eleve';
+const HOST = 'localhost';
+const DIALECT = 'mysql';
+const PORT = 3307;
+const CONNECTION = new Sequelize(DB, USER, PASSWORD, { host: HOST, dialect: DIALECT, port: PORT })
+module.exports.CONNECTION = CONNECTION;
+
+// const sequelize = new Sequelize(
+//     'process.env.DB_NAME',
+//     'process.env.DB_USERNAME',
+//     'process.env.DB_PASS',
+//     {
+//         //host: 'localhost',
+//         dialect: 'mysql',
+//         port: '3307',
+//         // dialectOptions: {
+//         //     timezone:'Etc/GTM+1'
+//         // },
+//         logging:false
+//     }
+// )
+
+// const sequelize = new Sequelize('database', 'username', 'password', {
+//     host: 'localhost',
+//     dialect: 'mysql',
+//   });
+// try {
+//     await sequelize.authenticate();
+//     console.log('Connection has been established successfully.');
+//   } catch (error) {
+//     console.error('Unable to connect to the database:', error);
+//   }
+
+CONNECTION.authenticate()
+    .then(_ => console.log('Connection à la base de données a bien été établie.'))
+    .catch(error => console.error(`Impossible de se connecter à la base de données...${error}`))
+
+
+// sequelize.authenticate()
+//     .then(_ => console.log('Connection à la base de données a bien été établie.'))
+//     .catch(error=> console.error(`Impossible de se connecter à la base de données...${error}`))
 
 // app.use(orm.express("mysql://eleve:eleve@localhost/gdp", {
 // 	define: function (db, models, next) {
@@ -25,7 +74,7 @@ app.get('/', (req, res) => {
 });
 
 //ajout d'un préfixe après la / si nécessaire!
-app.use('/',portailRoutes)
+app.use('/', portailRoutes)
 
 app.use((use, res) => {
     res.status(404);
