@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <%- include('partials/head') %>
+</head>
+
+<body>
+    <%- include('partials/nav') %>
+    <div class="container-lg">
+    <form action="/agent/create" method="POST" enctype="multipart/form-data">
+        <h1>Nouvel agent </h1>
+            <fieldset>
+
+                    <legend>Agents</legend>
+
+                <table>
+    
+                <div class="m-1">
+                    <tr>
+                        <td>
+                            ID :
+                        </td>
+                        <td><input type="text" class="form-control m-1" name="id" value=""></td>
+                    </tr>
+                    <tr>
+                        <td>Matricule : </td>
+                        <td><div class="input-group m-1"><span class="input-group-text" id="basic-addon1">A</span>
+                        <input type="number" class="form-control m-1" maxlength="50" name="matricule" required autofocus placeholder="Obligatoire" value=""></div></td>
+                    </tr>
+                    <tr>
+                        <td>Nom : </td>
+                        <td><input type="text" class="form-control m-1" onkeyup="this.value = this.value.toUpperCase();" maxlength="50" name="lastname" required placeholder="Obligatoire" value=""></td>
+                    </tr>
+                    <tr>
+                        <td>Prenom : </td>
+                        <td><input type="text" class="form-control m-1" onkeyup="this.charAt(0).toUpperCase() + this.slice(1)" maxlength="50" name="firstname" required placeholder="Obligatoire" value=""></td>
+                    </tr>
+    
+                    <tr>
+                        <td>Date de naissance : </td>
+                        <td><input type="date" class="form-control m-1" maxlength="50" name="date" value=""></td>
+                    </tr>
+                    <tr>
+                        <td>Adresse : </td>
+                        <td><input type="text" class="form-control m-1" maxlength="50" name="adresse" placeholder="Adresse" value=""></td>
+                    </tr>
+                    <tr>
+                        <td>Code Postal : </td>
+                        <td><input type="text" class="form-control m-1" maxlength="50" name="cp" placeholder="Code Postal" value=""></td>
+                    </tr>
+                    <tr>
+                        <td>Téléphone : </td>
+                        <td><input type="text" class="form-control m-1" maxlength="50" name="tel" placeholder="Téléphone" value=""></td>
+                    </tr>
+                    <tr>
+                        <td colspan="2" m-1>
+
+                        </td>
+                    </tr>
+    
+                    <table>
+                        <tr>
+                            <td>
+                                <input type="reset" name="bInit" value="Réinitialiser" class="btn bg-danger
+                                m-1 text-white" />
+                            </td>
+                            <td>
+                                &nbsp;<input type="submit" name="bAjoutAgent" value="Ajouter" class="btn btn-primary m-1">
+                            </td>
+                        </tr>
+    
+                    </table>
+    
+            </fieldset>
+        </form>
+    </div>
+    <%- include('partials/footer') %>
+    
+    <%- include('partials/scripts') %>
+</body>
+
+</html>
