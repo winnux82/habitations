@@ -2,19 +2,22 @@ const express = require('express');
 const favicon = require('serve-favicon')
 const flash = require('connect-flash')
 const morgan = require('morgan')
+const path = require('path');
 const { success } = require('./helpers/helper');
 
-const sequelize = require('./config/sequelize')
-
-
+//const sequelize = require('./config/sequelize')
 
 require('dotenv').config();
 
-var app = express();
+const app = express();
 const port = 7800;
 
+const db = require('./config/database');
+db.authenticate()
+  .then(() => console.log('Database connected...'))
+  .catch(err => console.log('Error: ' + err))
 
-const path = require('path');
+
 const portailRoutes = require('./routes/portail.routes');
 
 

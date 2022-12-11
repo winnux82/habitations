@@ -1,11 +1,11 @@
 
 const { Sequelize, DataTypes } = require('sequelize');
 //var orm = require('orm');
-const dotenv = require('.dotenv');
+//const dotenv = require('.dotenv');
+//dotenv.config();
 const AgentModel = require('../models/agent')
-dotenv.config();
 
-const sequelize = new Sequelize(process.env.DB_NAME, 'eleve', 'eleve', {
+const sequelize = new Sequelize('gdp', 'eleve', 'eleve', {
     host: 'localhost',
     dialect: 'mysql',
     port: '3307',

@@ -1,42 +1,48 @@
-module.exports = (sequelize, DataTypes) => {
-    return sequelize.define('Agent', {
-        id: {
-            type: DataTypes.INTEGER,
-            primaryKey: true,
-            autoIncrement: true
-        },
-        nom: {
-            type: DataTypes.STRING,
-            allowNull: true
-        },
-        prenom: {
-            type: DataTypes.STRING,
-            allowNull: true
-        },
-        datedenaissance: {
-            type: DataTypes.STRING,
-            allowNull: true
-        },
-        matricule: {
-            type: DataTypes.STRING,
-            allowNull: true
-        },
-        adresse: {
-            type: DataTypes.STRING,
-            allowNull: true
-        },
-        cp: {
-            type: DataTypes.STRING,
-            allowNull: true
-        },
-        tel: {
-            type: DataTypes.STRING,
-            allowNull: true
-        },
+const Sequelize = require('sequelize');
+const db = require('../config/database');
 
-    }, {
-        timestamps: true,
-        createdAt: 'created',
-        updatedAt: false
-    })
-}
+const Agent = db.define('agent', {
+    id: {
+        type: Sequelize.INTEGER,
+        primaryKey: true,
+        autoIncrement: true
+    },
+    nom: {
+        type: Sequelize.STRING,
+        allowNull: true
+    },
+    prenom: {
+        type: Sequelize.STRING,
+        allowNull: true
+    },
+    datedenaissance: {
+        type: Sequelize.STRING,
+        allowNull: true
+    },
+    matricule: {
+        type: Sequelize.STRING,
+        allowNull: true
+    },
+    adresse: {
+        type: Sequelize.STRING,
+        allowNull: true
+    },
+    cp: {
+        type: Sequelize.STRING,
+        allowNull: true
+    },
+    tel: {
+        type: Sequelize.STRING,
+        allowNull: true
+    },
+
+}, {
+    timestamps: true,
+    createdAt: 'created',
+    updatedAt: false
+})
+
+Agent.sync().then(() => {
+    console.log('Table Agents créée');
+});
+module.exports = Agent;
