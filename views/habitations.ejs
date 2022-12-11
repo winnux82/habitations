@@ -7,93 +7,30 @@
 
 <body>
     <%- include('partials/nav') %>
-    <div class="container-lg">
-
-    <form action="/habitation/create" method="POST" enctype="multipart/form-data">
-        <h1>Inscription surveillances habitations </h1>
-        <fieldset>
-
-                <legend>Ajouter une surveillance d'habitation</legend>
-
-            <table>
-
-                <div class="m-1">
+        <div class="container-lg">
+            <h1 class="mt-5"><i class="fa-solid fa-location-dot" aria-hidden="true"></i> Liste des habitations </h1>
+            <table border="1" class="table table-hover table-light" id="tableauHabitations">
+                <thead class="thead-light">
                     <tr>
-                        <td>
-                            ID :
-                        </td>
-                        <td><input type="text" class="form-control m-1" name="id" value=""></td>
+                        <th>id</th>
+                        <th>Adresse</th>
+                        <th>Localité</th>
+                        <th>Date Début</th>
+                        <th>Date Fin</th>
+                        <th>Modifier</th>
+
                     </tr>
-                    <tr>
-                        <td>Demandeur : </td>
-                        <td>
-                            <div class="input-group m-1">
-                                <input type="text" class="form-control m-1" maxlength="50" name="demandeur" required autofocus placeholder="Obligatoire" value="">
-                            </div>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>Adresse : </td>
-                        <td>
-                            <div class="input-group m-1">
-                                <input type="text" class="form-control m-1" maxlength="50" name="adresse" required placeholder="Obligatoire" value="">
-                            </div>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>Localité : </td>
-                        <td><input type="number" class="form-control m-1" maxlength="10" name="localite" required placeholder="Obligatoire" value=""></td>
-                    </tr>
-                    <tr>
-                        <td>Date début : </td>
-                        <td><input type="datetime-local" class="form-control m-1" name="datedebut" value=""></td>
-                    </tr>
+                </thead>
 
-                    <tr>
-                        <td>Date de fin : </td>
-                        <td><input type="datetime-local" class="form-control m-1" name="datefin" value=""></td>
-                    </tr>
-
-                    <tr>
-                        <td>Mesures: </td>
-                            <td>
-                                <textarea class="form-control" id="txtArea" name="mesures" rows="4" cols="48"></textarea>
-                            </td>
-                    </tr>
-                    <tr>
-                        <td>Véhicule : </td>
-                        <td><input type="text" class="form-control m-1" maxlength="50" name="vehicule" placeholder="Ex. Marque Modèle Plaque garage" value=""></td>
-                    </tr>
-                    <tr>
-                        <td colspan="2" m-1>
-
-                        </td>
-                    </tr>
-
-                    <table>
-                        <tr>
-                            <td>
-                                <input type="reset" name="bInit" value="Réinitialiser" class="btn bg-danger
-                                m-1 text-white" />
-                            </td>
-                            <td>
-                                &nbsp;<input type="submit" name="bAjouthabitation" value="Ajouter" class="btn btn-primary m-1">
-                            </td>
-                        </tr>
-
-                    </table>
-
-        </fieldset>
-    </form>
+            </table>
 
 
 
 
+        </div>
+        <%- include('partials/footer') %>
 
-    </div>
-    <%- include('partials/footer') %>
-    
-    <%- include('partials/scripts') %>
+            <%- include('partials/scripts') %>
 </body>
 
 </html>

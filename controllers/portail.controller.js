@@ -12,8 +12,16 @@ const admin = catchAsync(async(req, res) => {
 });
 
 
+const err404 = catchAsync(async(req, res) => {
+    res.render('404', {
+        title: 'Erreur 404',
+});    
+});
+
+
 module.exports = {
     
     admin,
+    err404,
 
 }

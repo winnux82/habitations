@@ -1,6 +1,6 @@
 const express = require('express');
 const favicon = require('serve-favicon')
-const { Sequelize, DataTypes } = require('sequelize');
+
 //var orm = require('orm');
 
 const AgentModel = require('./models/agent')
