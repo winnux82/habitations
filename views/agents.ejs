@@ -8,7 +8,7 @@
 <body>
     <%- include('partials/nav') %>
         <div class="container-lg">
-            <h1 class="mt-5"><i class="fa-solid fa-phone" aria-hidden="true"></i> Liste des agents </h1>
+            <h1 class="mt-5 mb-5"><i class="fa-solid fa-phone" aria-hidden="true"></i> Liste des agents </h1>
             <table border="1" class="table table-light table-hover ">
                 <thead class="thead-light">
                     <tr>
@@ -20,11 +20,33 @@
                         <th>Supprimer</th>
                     </tr>
                 </thead>
+
+
+                <% agents.forEach((agent)=> { %>
+                    <tr class="table-row" data-href="agents.php?id=' . $Infos['id'] . '">
+                    <tr class="clickable-row" data-href="url://agents.php?id=' . $Infos['id'] . '">
+                        <td>
+                            <%= agent.matricule %>
+                        </td>
+                        <td>
+                            <%= agent.nom %>
+                        </td>
+                        <td>
+                            <%= agent.prenom %>
+                        </td>
+                        <td>
+                            <%= agent.tel %>
+                        </td>
+                        <td><a href="../agent/<%= agent.id %>/modifier" class="link-light badge bg-primary rounded-pill">Modifier</a></td>
+                        <td><a onclick="return confirm('Voulez-vous vraiment supprimer cet élement ?')"
+                                href="../agent/<%= agent.id %>/delete"
+                                class="link-light badge bg-danger rounded-pill">Supprimer</a></td>
+                    </tr>
+                    <% }) %>
             </table>
         </div>
         <%- include('partials/footer') %>
-
-        <%- include('partials/scripts') %>
+<%- include('partials/scripts') %>
 </body>
 
 </html>

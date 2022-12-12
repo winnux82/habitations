@@ -1,46 +1,19 @@
 const Agent = require('../models/agent')
 const catchAsync = require('../helpers/catchAsync')
-const path = require('path');
-const fs = require('fs');
-const db = require('../config/database');
-
+// const path = require('path');
+// const fs = require('fs');
+// const db = require('../config/database');
+// const flash = require('connect-flash')
 
 const agents = catchAsync(async (req, res) => {
+    const agents = await Agent.findAll();
+        //console.log(agents);
     res.render('agents', {
-        title: 'Agents',
-
+        title: 'Les agents',
+        //Agents
+        agents: agents
     });
 });
-//=>/agents/list
-const listeAgents = catchAsync(async (req, res) => {
-
-    const listeAgents = await Agent.findAll();
-    console.log(listeAgents.every(agent => agent instanceof Agent)); // true
-    console.log("All agents:", JSON.stringify(agents));
-    res.render('agents', {
-        title: 'Agents',
-
-    });
-});
-
-
-const listeAgents2 = catchAsync(async (req, res) => 
-    Agent.findAll()
-        .then(agents => res.render('agents',
-            {
-        title: 'Agents',
-        agents
-      }))
-    .catch(err => res.render('error', {error: err})));
-;
-
-
-const createAgentForm = (req, res) => {
-    res.render('new-agent', {
-        title: 'Nouvel agent',
-        //errors: req.flash('error'),
-    });
-};
 
 const getAll = (req, res) => { 
     Agent.findAll()
@@ -50,21 +23,48 @@ const getAll = (req, res) => {
     .catch(error=>res.status(500).json(error))
     
 };
-// const getOne = (req, res) => { };
-// const createOne = (req, res) => {
-//     Agent.create({
-//         matricule: '114'
-//     })
-// };
-// const updateOne = (req, res) => { };
-// const deleteOne = (req, res) => { };
+
+const createAgent =async (req, res) => {
+    try {
+        //res.send(req.body);
+        
+        console.log(req.body);
+        return;
+        if (!req.body.matricule) {
+            //req.flash('error', 'Le matricule ne doit pas être vide!');
+            res.redirect('/agent/create');
+            return;
+        }
+        await Agent.create({
+            matricule: req.body.matricule,
+            nom: req.body.lastname,  
+            prenom: req.body.firstname,
+            datedenaissance: req.body.date,
+            adresse: req.body.adresse,
+            cp: req.body.cp,
+            tel: req.body.tel,
+        });
+        res.redirect('/agents');
+    } catch (err) {
+        console.log(err);
+        //req.flash('error', 'Erreur lors de la création de l\'agent');
+        res.redirect('/agent/create');
+   }
+};
+
+const createAgentForm = (req, res) => {
+    res.render('new-agent', {
+        title: 'Nouvel agent',
+        //errors: req.flash('error'),
+    });
+};
+
+
 
 
 module.exports = {
     agents,
+    createAgent,
     createAgentForm,
     getAll,
-    listeAgents,
-    listeAgents2,
-
 }

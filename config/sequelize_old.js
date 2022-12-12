@@ -3,7 +3,6 @@ const { Sequelize, DataTypes } = require('sequelize');
 //var orm = require('orm');
 //const dotenv = require('.dotenv');
 //dotenv.config();
-const AgentModel = require('../models/agent')
 
 const sequelize = new Sequelize('gdp', 'eleve', 'eleve', {
     host: 'localhost',
@@ -13,10 +12,11 @@ const sequelize = new Sequelize('gdp', 'eleve', 'eleve', {
 
 
 sequelize.authenticate()
-    .then(_ => console.log('Connection à la base de données a bien été établie.'))
-    .catch(error => console.error(`Impossible de se connecter à la base de données...${error}`))
+.then(_ => console.log('Connection à la base de données a bien été établie.'))
+.catch(error => console.error(`Impossible de se connecter à la base de données...${error}`))
 
 const Agent = AgentModel(sequelize, DataTypes);
+const AgentModel = require('../models/agent')
 
 sequelize.sync({ force: true })
     .then(_ => {

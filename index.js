@@ -1,30 +1,41 @@
 const express = require('express');
+const session = require('express-session');
 const favicon = require('serve-favicon')
 const flash = require('connect-flash')
 const morgan = require('morgan')
 const path = require('path');
 const { success } = require('./helpers/helper');
-
-//const sequelize = require('./config/sequelize')
+const bp = require('body-parser')
 
 require('dotenv').config();
 
+
+// const sequelize = require('./config/sequelize')
+
+
 const app = express();
 const port = 7800;
-
-const db = require('./config/database');
-db.authenticate()
-  .then(() => console.log('Database connected...'))
-  .catch(err => console.log('Error: ' + err))
-
-
 const portailRoutes = require('./routes/portail.routes');
 
+app.use(bp.json())
+app.use(bp.urlencoded())
+
+const db = require('./config/database');
+
+try {
+    db.authenticate()
+        .then(_ => console.log('Connection à la base de données a bien été établie.'))
+        .catch(error => console.error(`Impossible de se connecter à la base de données...${error}`))
+} catch (error) {
+    console.error('Unable to connect to the database:', error);
+}
 
 
 app.get('/', (req, res) => {
     res.redirect('/habitations');
 });
+
+
 app
     .set('view engine', 'ejs')
     .set('views', path.join(__dirname, 'views'));
@@ -37,25 +48,14 @@ app
     .use((use, res) => {
         res.status(404);
         res.redirect('/404');
-    });
+    })
+    .use((err, req, res, next) => {
+        console.log(err);
+        res.status(500);
+        res.send('Erreur interne du serveur');
+    })
 
 
-// app.use(logger = (req, res, next) => {
-//     console.log(`URL : ${req.url}`)
-//     next();
-// })
-
-//ajout d'un préfixe après la / si nécessaire!
-
-// app.get('/', function (req, res) {
-//     //res.send('hello world');
-//     res.render('home');
-// })
-
-// app.get('/hi/:name/:lastname', (req, res) => {
-//     console.log(req.params);
-//     res.render('hi', { firstname: req.params.name, lastname: req.params.lastname })
-// })
 
 app.listen(port, () => {
     console.log(`L\'application GDP est démarrée sur : http://localhost:${port}`);

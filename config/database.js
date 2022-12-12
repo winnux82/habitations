@@ -8,3 +8,4 @@ module.exports =  new Sequelize('gdp', 'eleve', 'eleve', {
   port:'3307'
 
 });
+

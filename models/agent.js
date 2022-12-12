@@ -43,6 +43,8 @@ const Agent = db.define('agent', {
 })
 
 Agent.sync().then(() => {
-    console.log('Table Agents créée');
+    console.log('Table agents créée');
 });
+
+
 module.exports = Agent;

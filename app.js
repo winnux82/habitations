@@ -1,5 +1,6 @@
 const express = require('express');
 const favicon = require('serve-favicon')
+const flash = require('connect-flash')
 
 //var orm = require('orm');
 
@@ -18,22 +19,28 @@ const portailRoutes = require('./routes/portail.routes');
 const sequelize = new Sequelize('gdp', 'eleve', 'eleve', {
     host: 'localhost',
     dialect: 'mysql',
-    port:'3307',
-  });
-// try {
-//     await sequelize.authenticate();
-//     console.log('Connection has been established successfully.');
-//   } catch (error) {
-//     console.error('Unable to connect to the database:', error);
-// }
+    port: '3307',
+});
 
-sequelize.authenticate()
-    .then(_ => console.log('Connection à la base de données a bien été établie.'))
-    .catch(error => console.error(`Impossible de se connecter à la base de données...${error}`))
+
+const bodyParser = require('body-parser')
+// parse application/x-www-form-urlencoded
+app.use(bodyParser.urlencoded())
+// parse application/json
+app.use(bodyParser.json())
+
+try {
+    sequelize.authenticate()
+        .then(_ => console.log('Connection à la base de données a bien été établie.'))
+        .catch(error => console.error(`Impossible de se connecter à la base de données...${error}`))
+} catch (error) {
+    console.error('Unable to connect to the database:', error);
+}
+
 
 const Agent = AgentModel(sequelize, DataTypes);
 
-sequelize.sync({force:true})
+sequelize.sync({ force: true })
     .then(_ => {
         console.log('La base de données "GDP" a bien été synchronisée.')
 
