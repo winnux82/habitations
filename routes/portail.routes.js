@@ -13,7 +13,8 @@ router.get('/404', portailController.err404);
 router.get('/agents', AgentController.agents);
 router.post('/agent/create', AgentController.createAgent);
 router.get('/agent/create', AgentController.createAgentForm);
-
+router.get('/agent/:id/delete', AgentController.deleteAgent);
+router.get('/agent/:id/update', AgentController.updateAgent);
 
 //Habitations
 router.get('/habitations', HabitationController.habitations);

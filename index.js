@@ -18,7 +18,7 @@ const port = 7800;
 const portailRoutes = require('./routes/portail.routes');
 
 app.use(bp.json())
-app.use(bp.urlencoded())
+app.use(bp.urlencoded({ extended: true }));
 
 const db = require('./config/database');
 
