@@ -2,14 +2,15 @@ const express = require('express');
 const router = express.Router();
 const AgentController = require('../controllers/agent.controller');
 const HabitationController = require('../controllers/habitation.controller');
-const portailController = require('../controllers/portail.controller');
+const PortailController = require('../controllers/portail.controller');
 
 //Administration
-router.get('/admin', portailController.admin);
-router.get('/404', portailController.err404);
+router.get('/admin', PortailController.admin);
+router.get('/404', PortailController.err404);
 
 //Agents
 router.get('/agents', AgentController.agents);
+router.get('/json', AgentController.getAll);
 router.post('/agent/create', AgentController.createAgent);
 router.get('/agent/create', AgentController.createAgentForm);
 router.get('/agent/:id/delete', AgentController.deleteAgent);

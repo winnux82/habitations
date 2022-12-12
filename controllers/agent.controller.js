@@ -3,6 +3,9 @@ const catchAsync = require('../helpers/catchAsync');
 
 const agents = catchAsync(async (req, res) => {
     const agents = await Agent.findAll();
+
+    //console.log(listeAgents.every((agent) => agent instanceof Agent)); // true
+    console.log('All agents:', JSON.stringify(agents, null, 2));
     //console.log(agents);
     res.render('agents', {
         title: 'Les agents',
@@ -12,13 +15,13 @@ const agents = catchAsync(async (req, res) => {
     });
 });
 
-const getAll = (req, res) => {
-    Agent.findAll()
+const getAll = catchAsync(async (req, res) => {
+    const agents = await Agent.findAll()
         .then((agents) => {
             res.status(200).json(agents);
         })
         .catch((error) => res.status(500).json(error));
-};
+});
 
 const createAgent = async (req, res) => {
     const { matricule, lastname, firstname, birthday, adresse, cp, tel } =
