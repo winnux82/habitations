@@ -1,39 +1,40 @@
 {
-  "name": "surveillances_habitations",
-  "version": "1.0.0",
-  "description": "Surveillances habitations GDP Mouscron",
-  "main": "index.js",
-  "scripts": {
-    "start": "nodemon index.js",
-    "dev": "nodemon app.js",
-    "build": "react-scripts build",
-    "test": "react-scripts test --env=jsdom",
-    "eject": "react-scripts eject"
-  },
-  "author": "Vandermeulen Christophe",
-  "license": "MIT",
-  "dependencies": {
-    "body-parser": "^1.20.1",
-    "class-transformer": "^0.5.1",
-    "class-validator": "^0.14.0",
-    "connect-flash": "^0.1.1",
-    "dotenv": "^16.0.3",
-    "ejs": "^3.1.8",
-    "express": "^4.18.2",
-    "express-session": "^1.17.3",
-    "mariadb": "^3.0.2",
-    "mysql2": "^2.3.3",
-    "orm": "^7.1.0",
-    "path": "^0.12.7",
-    "postman": "^0.2.0",
-    "reflect-metadata": "^0.1.13",
-    "sequelize": "^6.26.0",
-    "serve-favicon": "^2.5.0",
-    "typeorm": "^0.3.11"
-  },
-  "devDependencies": {
-    "@types/node": "^18.11.13",
-    "morgan": "^1.10.0",
-    "nodemon": "^2.0.20"
-  }
+    "name": "surveillances_habitations",
+    "version": "1.0.0",
+    "description": "Surveillances habitations GDP Mouscron",
+    "main": "index.js",
+    "scripts": {
+        "start": "nodemon index.js",
+        "dev": "nodemon app.js",
+        "build": "react-scripts build",
+        "test": "react-scripts test --env=jsdom",
+        "eject": "react-scripts eject"
+    },
+    "author": "Vandermeulen Christophe",
+    "license": "MIT",
+    "dependencies": {
+        "body-parser": "^1.20.1",
+        "class-transformer": "^0.5.1",
+        "class-validator": "^0.14.0",
+        "connect-flash": "^0.1.1",
+        "dotenv": "^16.0.3",
+        "ejs": "^3.1.8",
+        "express": "^4.18.2",
+        "express-session": "^1.17.3",
+        "mariadb": "^3.0.2",
+        "mysql2": "^2.3.3",
+        "orm": "^7.1.0",
+        "path": "^0.12.7",
+        "postman": "^0.2.0",
+        "reflect-metadata": "^0.1.13",
+        "sequelize": "^6.26.0",
+        "serve-favicon": "^2.5.0",
+        "typeorm": "^0.3.11"
+    },
+    "devDependencies": {
+        "@types/node": "^18.11.13",
+        "morgan": "^1.10.0",
+        "nodemon": "^2.0.20",
+        "prettier": "^2.8.1"
+    }
 }

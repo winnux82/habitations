@@ -8,7 +8,7 @@
 <body>
     <%- include('partials/nav') %>
         <div class="container-lg">
-            <h1 class="mt-5 mb-5"><i class="fa-solid fa-phone" aria-hidden="true"></i> Liste des agents </h1>
+            <h1 class="mt-5 mb-5"><i class="fa-solid fa-user" aria-hidden="true"></i> Liste des agents </h1>
             <table border="1" class="table table-light table-hover ">
                 <thead class="thead-light">
                     <tr>
@@ -29,15 +29,16 @@
                             <%= agent.matricule %>
                         </td>
                         <td>
-                            <%= agent.nom %>
+                            <%= agent.lastname %>
                         </td>
                         <td>
-                            <%= agent.prenom %>
+                            <%= agent.firstname %>
                         </td>
                         <td>
                             <%= agent.tel %>
                         </td>
-                        <td><a href="../agent/<%= agent.id %>/modifier" class="link-light badge bg-primary rounded-pill">Modifier</a></td>
+                        <td><a href="../agent/<%= agent.id %>/"
+                                class="link-light badge bg-primary rounded-pill">Modifier</a></td>
                         <td><a onclick="return confirm('Voulez-vous vraiment supprimer cet élement ?')"
                                 href="../agent/<%= agent.id %>/delete"
                                 class="link-light badge bg-danger rounded-pill">Supprimer</a></td>
@@ -46,7 +47,7 @@
             </table>
         </div>
         <%- include('partials/footer') %>
-<%- include('partials/scripts') %>
+            <%- include('partials/scripts') %>
 </body>
 
 </html>
