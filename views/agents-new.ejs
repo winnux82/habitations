@@ -13,7 +13,7 @@
                 <h1 class="mt-5 mb-5"><i class="fa-solid fa-user" aria-hidden="true"></i> Agents </h1>
                 <fieldset>
 
-                    <legend>Modification d'un agent</legend>
+                    <legend>Création d'un agent</legend>
 
                     <table>
                         <div class="input-group mb-3">
@@ -31,7 +31,7 @@
                                                 id="basic-addon1">A</span>
 
                                             <input type="number" class="form-control m-1" maxlength="50"
-                                                name="matricule" required autofocus placeholder="Obligatoire" value="">
+                                                name="matricule" autofocus placeholder="Obligatoire" value="">
                                         </div>
                                     </td>
                                 </tr>
@@ -39,13 +39,13 @@
                                     <td><label class="form-label">Nom: </label></td>
                                     <td><input type="text" class="form-control m-1"
                                             onkeyup="this.value = this.value.toUpperCase();" maxlength="50"
-                                            name="lastname" required placeholder="Obligatoire" value=""></td>
+                                            name="lastname" placeholder="Obligatoire" value=""></td>
                                 </tr>
                                 <tr>
                                     <td><label class="form-label">Prénom: </label></td>
                                     <td><input type="text" class="form-control m-1"
                                             onkeyup="this.charAt(0).toUpperCase() + this.slice(1)" maxlength="50"
-                                            name="firstname" required placeholder="Obligatoire" value=""></td>
+                                            name="firstname" placeholder="Obligatoire" value=""></td>
                                 </tr>
 
                                 <tr>
@@ -90,6 +90,13 @@
                     </table>
                 </fieldset>
             </form>
+            <% if (errors.length) { %>
+
+                <div class="alert alert-danger mt-4 mb-2" role="alert">
+                    <%= errors[0] %>
+                </div>
+
+                <% } %>
         </div>
         <%- include('partials/footer') %>
 

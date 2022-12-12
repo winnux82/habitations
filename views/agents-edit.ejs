@@ -30,7 +30,7 @@
                                         <div class="input-group m-1"><span class="input-group-text"
                                                 id="basic-addon1">A</span>
                                             <input type="number" class="form-control m-1" maxlength="50"
-                                                name="matricule" required autofocus placeholder="Obligatoire"
+                                                name="matricule" autofocus placeholder="Obligatoire"
                                                 value="<%= matricule %>">
                                         </div>
                                     </td>
@@ -39,15 +39,14 @@
                                     <td>Nom : </td>
                                     <td><input type="text" class="form-control m-1"
                                             onkeyup="this.value = this.value.toUpperCase();" maxlength="50"
-                                            name="lastname" required placeholder="Obligatoire" value="<%= lastname %>">
+                                            name="lastname" placeholder="Obligatoire" value="<%= lastname %>">
                                     </td>
                                 </tr>
                                 <tr>
                                     <td>Prenom : </td>
                                     <td><input type="text" class="form-control m-1"
                                             onkeyup="this.charAt(0).toUpperCase() + this.slice(1)" maxlength="50"
-                                            name="firstname" required placeholder="Obligatoire"
-                                            value="<%= firstname %>">
+                                            name="firstname" placeholder="Obligatoire" value="<%= firstname %>">
                                     </td>
                                 </tr>
 
@@ -94,6 +93,13 @@
                     </table>
                 </fieldset>
             </form>
+            <% if (errors.length) { %>
+
+                <div class="alert alert-danger mt-4 mb-2" role="alert">
+                    <%= errors[0] %>
+                </div>
+
+                <% } %>
         </div>
         <%- include('partials/footer') %>
 

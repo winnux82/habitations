@@ -24,7 +24,7 @@ const db = require('./config/database');
 try {
     db.authenticate()
         .then((_) =>
-            console.log('Connection à la base de données a bien été établie.')
+            console.log('Connexion à la base de données a bien été établie.')
         )
         .catch((error) =>
             console.error(
@@ -40,11 +40,20 @@ app.get('/', (req, res) => {
 });
 
 app.set('view engine', 'ejs').set('views', path.join(__dirname, 'views'));
+app.set('trust proxy', 1); // trust first proxy
 app.use(express.static('public'))
+    .use(
+        session({
+            secret: 'Pd4UIdgMa',
+            resave: false,
+            saveUninitialized: true,
+            //cookie: { secure: true }
+        })
+    )
+    .use(flash())
     .use('/', portailRoutes)
     .use(morgan('dev'))
     .use(favicon(__dirname + '/favicon.ico'))
-    .use(flash())
     .use((use, res) => {
         res.status(404);
         res.redirect('/404');
@@ -54,7 +63,6 @@ app.use(express.static('public'))
         res.status(500);
         res.send(`Erreur interne du serveur ${err}`);
     });
-
 app.listen(port, () => {
     console.log(
         `L\'application GDP est démarrée sur : http://localhost:${port}`
