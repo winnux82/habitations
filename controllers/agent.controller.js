@@ -91,8 +91,9 @@ const deleteAgent = catchAsync(async (req, res) => {
     console.log(idAgent)
     try {
         //await Invoice.destroy({ where: { id: 2 } });
-        await Agent.destroy({ where: { id: idAgent } })
-            .sucess(res.redirect('/agents/'))
+        await
+            Agent.destroy({ where: { id: idAgent } })
+                .sucess(res.redirect('/agents/'))
         
 
         
