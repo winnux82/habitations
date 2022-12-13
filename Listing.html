@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="/node_modules/bootstrap/dist/css/bootstrap.min.css">
+</head>
+
+<body>
+
+    <div class="container mt-5">
+        <div class="row" id="pokemon-list">
+
+        </div>
+    </div>
+    <!-- -->
+
+
+    <script type="text/javascript" src="/node_modules/jquery/dist/jquery.min.js"></script>
+    <script type="text/javascript">
+        const pokemons = [];
+        const data = $.ajax({
+            url: 'http://localhost:7800/agents/json',
+            method: 'GET'
+        })
+            .promise()
+            .then((response) => {
+                //const { results, count } = response;
+
+                console.log(response)
+                // renderList(results.map(r => {
+                //     const url = r.url.split('/')
+                //     r.id = 'id=>' + url[6];
+                //     return r;
+                // }));
+            })
+
+        function renderList(results) {
+            const content = results.map(r => {
+                return `<div class="col-4 mt-2">
+                <div class="card" style="width: 18rem;">
+                    
+                    <div class="card-body">
+                        <h5 class="card-title">${r.name}</h5>
+                        <p class="card-text">${r.id}</p>
+                        <a href="${r.url}" class="btn btn-primary">Consulter</a>
+                    </div>
+                </div>
+            </div>`
+            }).join('');
+
+            $('#pokemon-list').html(content);
+        }
+    </script>
+</body>
+
+</html>

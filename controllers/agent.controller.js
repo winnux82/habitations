@@ -4,13 +4,12 @@ const catchAsync = require('../helpers/catchAsync');
 const agents = catchAsync(async (req, res) => {
     const agents = await Agent.findAll();
 
-    //console.log(listeAgents.every((agent) => agent instanceof Agent)); // true
-    console.log('All agents:', JSON.stringify(agents, null, 2));
-    //console.log(agents);
+    //console.log('All agents:', JSON.stringify(agents, null, 2));
+
     res.render('agents', {
-        title: 'Les agents',
+        title: 'Listing des agents',
         //Agents
-        agents: agents,
+        agents,
         errors: req.flash('error'),
     });
 });
@@ -44,7 +43,12 @@ const createAgent = async (req, res) => {
             adresse,
             cp,
             tel,
-        });
+        }).then(
+            console.log(
+                `----------->L\'agent ${matricule} a bien été créé<-----------`
+            )
+        );
+
         res.redirect('/agents');
     } catch (err) {
         console.log(err);
@@ -76,7 +80,12 @@ const updateAgent = async (req, res) => {
                 tel,
             },
             { where: { id } }
-        ).then(res.redirect('/agents'));
+        ).then(
+            res.redirect('/agents'),
+            console.log(
+                `----------->L\'agent ${matricule} a bien été modifié<-----------`
+            )
+        );
     } catch (err) {
         console.log(err);
         req.flash('error', "Erreur lors de la création de l'agent");
@@ -95,8 +104,14 @@ const deleteAgent = catchAsync(async (req, res) => {
     const idAgent = req.params.id;
     console.log(idAgent);
     try {
-        await Agent.destroy({ where: { id: idAgent } }).then(
-            res.redirect('/agents/')
+        await Agent.destroy({ where: { id: idAgent } }).on(
+            'success',
+            //await Agent.destroy({ where: { id: idAgent } }).then(
+            res.header('Refresh', '10'),
+            res.redirect('/agents/'),
+            console.log(
+                `----------->L\'agent ${matricule} a bien été effacé<-----------`
+            )
         );
     } catch (err) {
         console.log(err);

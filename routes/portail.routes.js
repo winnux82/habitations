@@ -10,7 +10,7 @@ router.get('/404', PortailController.err404);
 
 //Agents
 router.get('/agents', AgentController.agents);
-router.get('/json', AgentController.getAll);
+router.get('/agents/json', AgentController.getAll);
 router.post('/agent/create', AgentController.createAgent);
 router.get('/agent/create', AgentController.createAgentForm);
 router.get('/agent/:id/delete', AgentController.deleteAgent);
@@ -19,6 +19,10 @@ router.post('/agent/:id/update', AgentController.updateAgent);
 
 //Habitations
 router.get('/habitations', HabitationController.habitations);
+router.get('/habitations/json', HabitationController.getAll);
+router.post('/habitation/create', HabitationController.createHabitation);
 router.get('/habitation/create', HabitationController.createHabitationForm);
-
+router.get('/habitation/:id/delete', HabitationController.deleteHabitation);
+router.get('/habitation/:id/', HabitationController.fillForm);
+router.post('/habitation/:id/update', HabitationController.updateHabitation);
 module.exports = router;
