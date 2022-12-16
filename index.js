@@ -14,6 +14,8 @@ require('dotenv').config();
 
 const app = express();
 const port = 7800;
+
+const initAllRoutes = require('./routes');
 const portailRoutes = require('./routes/portail.routes');
 
 app.use(bp.json());
@@ -38,7 +40,7 @@ try {
 app.get('/', (req, res) => {
     res.redirect('/habitations');
 });
-
+app.use(express.static(__dirname + '/public'));
 app.set('view engine', 'ejs').set('views', path.join(__dirname, 'views'));
 app.set('trust proxy', 1); // trust first proxy
 app.use(express.static('public'))
@@ -50,6 +52,7 @@ app.use(express.static('public'))
             //cookie: { secure: true }
         })
     )
+
     .use(flash())
     .use('/', portailRoutes)
     .use(morgan('dev'))
@@ -67,4 +70,9 @@ app.listen(port, () => {
     console.log(
         `L\'application GDP est démarrée sur : http://localhost:${port}`
     );
+});
+
+app.use(function (req, res, next) {
+    console.log('Time:', Date.now());
+    next();
 });

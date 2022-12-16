@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <%- include('partials/head') %>
+</head>
+
+<body>
+    <%- include('partials/nav') %>
+        <div class="container-lg">
+            <h1 class="mt-5 mb-5"><i class="fa-solid fa-location-dot" aria-hidden="true"></i> Liste des habitations
+            </h1>
+            <table border="1" class="table table-hover table-light" id="tableauHabitations">
+                <thead class="thead-light">
+                    <tr>
+                        <th>id</th>
+                        <th>Adresse</th>
+                        <th>Localité</th>
+                        <th>Date Début</th>
+                        <th>Date Fin</th>
+                        <th>Modifier</th>
+                        <th>Supprimer</th>
+
+                    </tr>
+                </thead>
+                <% habitations.forEach((habitation)=> { %>
+                    <tr class="table-row" data-href="habitations.php?id=' . $Infos['id'] . '">
+                    <tr class="clickable-row" data-href="url://habitations.php?id=' . $Infos['id'] . '">
+                        <td>
+                            <%= habitation.id %>
+                        </td>
+                        <td>
+                            <%= habitation.adresse %>
+                        </td>
+                        <td>
+                            <%= habitation.localite %>
+                        </td>
+                        <td>
+                            <%= habitation.datedebut %>
+                        </td>
+                        <td>
+                            <%= habitation.datefin %>
+                        </td>
+                        <td><a href="../habitation/<%= habitation.id %>/"
+                                class="link-light badge bg-primary rounded-pill">Modifier</a></td>
+                        <td><a onclick="return confirm('Voulez-vous vraiment supprimer cet élement ?')"
+                                href="../habitation/<%= habitation.id %>/delete"
+                                class="link-light badge bg-danger rounded-pill">Supprimer</a>
+                        </td>
+                    </tr>
+                    <% }) %>
+            </table>
+
+
+
+
+        </div>
+        <%- include('partials/footer') %>
+
+            <%- include('partials/scripts') %>
+</body>
+
+</html>

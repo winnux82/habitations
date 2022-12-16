@@ -22,7 +22,7 @@ const getAll = catchAsync(async (req, res) => {
         .catch((error) => res.status(500).json(error));
 });
 
-const createAgent = async (req, res) => {
+const createAgent = catchAsync(async (req, res) => {
     const { matricule, lastname, firstname, birthday, adresse, cp, tel } =
         req.body;
     try {
@@ -52,10 +52,10 @@ const createAgent = async (req, res) => {
         res.redirect('/agents');
     } catch (err) {
         console.log(err);
-        //req.flash('error', 'Erreur lors de la création de l\'agent');
+        req.flash('error', "Erreur lors de la création de l'agent");
         res.redirect('/agent/create');
     }
-};
+});
 
 const updateAgent = async (req, res) => {
     const { id, matricule, lastname, firstname, birthday, adresse, cp, tel } =

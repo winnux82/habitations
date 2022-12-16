@@ -3,12 +3,40 @@
 
 <head>
     <%- include('partials/head') %>
+        <style>
+            #form {
+                display: none;
+                height: 700px;
+                /* left: -100%;
+
+                -webkit-box-shadow: inset 1px 0px 1px 0px rgba(232, 232, 232, 1);
+                -moz-box-shadow: inset 1px 0px 1px 0px rgba(232, 232, 232, 1);
+                box-shadow: inset 1px 0px 1px 0px rgba(232, 232, 232, 1);
+                transition: 1s ease-out;
+                opacity: 0; */
+            }
+
+            #container-table {
+                height: 700px;
+            }
+
+            #show-form {
+                left: 500px;
+                opacity: 1;
+            }
+
+            #spanChiffre {
+                color: rgb(247, 70, 70);
+            }
+        </style>
+        <%- include('partials/scripts') %>
 </head>
 
 <body>
     <%- include('partials/nav') %>
-        <div class="container-lg">
+        <div class="container-lg" id="container-table">
             <h1 class="mt-5 mb-5"><i class="fa-solid fa-user" aria-hidden="true"></i> Liste des agents </h1>
+            <button class="btn btn-success mb-4" id="add">Ajouter</button>
             <table border="1" class="table table-light table-hover ">
                 <thead class="thead-light">
                     <tr>
@@ -46,6 +74,163 @@
                     <% }) %>
             </table>
         </div>
+
+        <div class="container-lg" id="form">
+
+            <form action="/agent/create" method="POST">
+                <h1 class="mt-5 mb-5"><i class="fa-solid fa-user" aria-hidden="true"></i> Agents </h1>
+                <button id="btn-cancel" type="button" class="btn btn-danger mb-4">Annuler</button>
+                <fieldset>
+
+                    <legend>Création d'un agent</legend>
+
+                    <table>
+                        <div class="input-group mb-3">
+                            <div class="m-1">
+                                <tr>
+                                    <td>
+                                        <label class="form-label">ID</label>
+                                    </td>
+                                    <td><input type="text" class="form-control m-1" name="id" value=""></td>
+                                </tr>
+                                <tr>
+                                    <td><label class="form-label">Matricule</label></td>
+                                    <td>
+                                        <div class="input-group m-1"><span class="input-group-text"
+                                                id="basic-addon1">A</span>
+
+                                            <input type="text" class="form-control m-1" maxlength="50" name="matricule"
+                                                id="matricule" autofocus placeholder="Obligatoire" value="">
+                                            <span id="spanChiffre"></span>
+                                        </div>
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <td><label class="form-label">Nom: </label></td>
+                                    <td><input type="text" class="form-control m-1" maxlength="50" name="lastname"
+                                            placeholder="Obligatoire" value="" id="lastname"></td>
+                                    <!-- onkeyup="this.value = this.value.toUpperCase();" -->
+                                </tr>
+                                <tr>
+                                    <td><label class="form-label">Prénom: </label></td>
+                                    <td><input type="text" class="form-control m-1" maxlength="50" name="firstname"
+                                            placeholder="Obligatoire" value="" id="firstname"></td>
+                                    <!-- onkeyup="this.charAt(0).toUpperCase() + this.slice(1)" -->
+                                </tr>
+                                <script>
+
+                                    function capitalizeWord(input) {
+                                        return input.toUpperCase();
+                                    }
+
+                                    // Exemple d'utilisation
+                                    const lastname = document.querySelector('#lastname');
+                                    lastname.addEventListener('keypress', (event) => {
+                                        const value = event.target.value;
+                                        event.target.value = capitalizeWord(value);
+                                    });
+
+                                    function capitalizeFirstLetter(input) {
+                                        return input.charAt(0).toUpperCase() + input.slice(1);
+                                    }
+
+                                    // Exemple d'utilisation
+                                    const firstname = document.querySelector('#firstname');
+                                    firstname.addEventListener('keypress', (event) => {
+                                        const value = event.target.value;
+                                        event.target.value = capitalizeFirstLetter(value);
+                                    });
+
+
+
+
+                                    // récupération de l'élément input et de l'élément span
+                                    var matricule = document.getElementById('matricule');
+                                    var span = document.getElementById('spanChiffre');
+                                    var bAjoutAgent = document.getElementById('bAjoutAgent');
+
+                                    // ajout d'un écouteur d'événement pour détecter les modifications de l'input
+                                    matricule.addEventListener('input', function () {
+                                        // si la valeur de l'input n'est pas un nombre, on affiche le message dans le span
+                                        if (isNaN(matricule.value)) {
+                                            span.innerHTML = 'Veuillez entrer un nombre!';
+                                            bAjoutAgent.value = "prout"
+                                        } else {
+                                            span.innerHTML = '';
+                                        }
+                                    });
+
+                                </script>
+                                <tr>
+                                    <td><label class="form-label">Date de naissance: </label></td>
+                                    <td><input type="date" class="form-control m-1" maxlength="50" name="birthday"
+                                            value="">
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><label class="form-label">Adresse: </label></td>
+                                    <td><input type="text" class="form-control m-1" maxlength="50" name="adresse"
+                                            placeholder="Adresse" value=""></td>
+                                </tr>
+                                <tr>
+                                    <td><label class="form-label">Code postal: </label></td>
+                                    <td><input type="text" class="form-control m-1" maxlength="50" name="cp"
+                                            placeholder="Code Postal" value=""></td>
+                                </tr>
+                                <tr>
+                                    <td><label class="form-label">Téléphone: </label></td>
+                                    <td><input type="text" class="form-control m-1" maxlength="50" name="tel"
+                                            placeholder="Téléphone" value=""></td>
+                                </tr>
+                                <tr>
+                                    <td><label class="form-label"></label></td>
+                                    <td></td>
+                                </tr>
+
+                                <div class="button-group m-3">
+                                    <tr>
+                                        <td>
+                                            <input type="reset" name="bInit" value="Réinitialiser" class="btn bg-danger
+                                                m-1 text-white" />
+                                        </td>
+                                        <td>
+                                            &nbsp;<input type="submit" name="bAjoutAgent" id="bAjoutAgent"
+                                                value="Ajouter" class="btn btn-primary m-1">
+                                        </td>
+
+                                    </tr>
+
+                                </div>
+                            </div>
+                    </table>
+                </fieldset>
+            </form>
+            <% if (errors.length) { %>
+
+                <div class="alert alert-danger mt-4 mb-2" role="alert">
+                    <%= errors[0] %>
+                </div>
+
+                <% } %>
+        </div>
+
+
+
+        <script type="text/javascript">
+            const containerTable = document.getElementById('container-table');
+            const form = document.getElementById('form');
+
+            function toggleForm() {
+
+                $('#container-table, #form').toggle();
+                $('#form').toggleClass('#show-form');
+            }
+
+            $('#add, #btn-cancel').click(() => toggleForm());
+
+        </script>
+
         <%- include('partials/footer') %>
             <%- include('partials/scripts') %>
 </body>

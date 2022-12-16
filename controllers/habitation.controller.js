@@ -2,6 +2,10 @@ const Habitation = require('../models/habitation');
 const catchAsync = require('../helpers/catchAsync');
 
 const habitations = catchAsync(async (req, res) => {
+    // const [results, metadata] = await sequelize.query(
+    //     "select*, DATE_FORMAT(datedebut,'%d-%m-%Y %H:%i') as dateDebutFormat, DATE_FORMAT(datefin,'%d-%m-%Y %H:%i') as dateFinFormat from gdp.habitations where datedebut <= now() and datefin >= now() order by datedebut asc"
+    // );
+    // console.log(results, metadata);
     const habitations = await Habitation.findAll();
 
     //console.log('All habitations:', JSON.stringify(habitations, null, 2));
@@ -13,7 +17,14 @@ const habitations = catchAsync(async (req, res) => {
         errors: req.flash('error'),
     });
 });
-
+const validationHabitation = catchAsync(async (req, res) => {
+    const habitations = await Habitation.findAll();
+    res.render('habitations-validation', {
+        title: 'Validation des habitations',
+        habitations,
+        errors: req.flash('error'),
+    });
+});
 const getAll = catchAsync(async (req, res) => {
     const habitations = await Habitation.findAll()
         .then((habitations) => {
@@ -96,7 +107,7 @@ const updateHabitation = async (req, res) => {
                 created,
             },
             { where: { id } }
-        ).then(res.redirect('/habitations'));
+        ).then(res.redirect('/'));
     } catch (err) {
         console.log(err);
         req.flash('error', "Erreur lors de la création de l'habitation");
@@ -140,7 +151,7 @@ const fillForm = async (req, res) => {
             where: { id: idHabitation },
         });
 
-        console.log(detailsHabitation[0].adresse);
+        //console.log(detailsHabitation[0].adresse);
         res.render('habitations-edit', {
             title: "Modification d'un habitation",
             id: detailsHabitation[0].id,
@@ -169,4 +180,5 @@ module.exports = {
     deleteHabitation,
     fillForm,
     updateHabitation,
+    validationHabitation,
 };
