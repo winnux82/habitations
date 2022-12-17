@@ -13,7 +13,7 @@ require('dotenv').config();
 // const sequelize = require('./config/sequelize')
 
 const app = express();
-const port = 7800;
+const port = 7999;
 
 const initAllRoutes = require('./routes');
 const portailRoutes = require('./routes/portail.routes');

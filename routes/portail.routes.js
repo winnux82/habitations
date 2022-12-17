@@ -13,9 +13,9 @@ router.get('/agents', AgentController.agents);
 router.get('/agents/json', AgentController.getAll);
 router.post('/agent/create', AgentController.createAgent);
 router.get('/agent/create', AgentController.createAgentForm);
-router.get('/agent/:id/delete', AgentController.deleteAgent);
 router.get('/agent/:id/', AgentController.fillForm);
 router.post('/agent/:id/update', AgentController.updateAgent);
+router.get('/agent/:id/delete', AgentController.deleteAgent);
 
 //Habitations
 router.get('/habitations', HabitationController.habitations);
