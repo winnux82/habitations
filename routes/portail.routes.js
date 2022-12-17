@@ -11,11 +11,11 @@ router.get('/404', PortailController.err404);
 //Agents
 router.get('/agents', AgentController.agents);
 router.get('/agents/json', AgentController.getAll);
-router.post('/agent/create', AgentController.createAgent);
-router.get('/agent/create', AgentController.createAgentForm);
-router.get('/agent/:id/', AgentController.fillForm);
-router.post('/agent/:id/update', AgentController.updateAgent);
-router.get('/agent/:id/delete', AgentController.deleteAgent);
+router.post('/agents/create', AgentController.createAgent);
+router.get('/agents/create', AgentController.createAgentForm);
+router.get('/agents/:id/', AgentController.fillForm);
+router.post('/agents/:id/update', AgentController.updateAgent);
+router.get('/agents/:id/delete', AgentController.deleteAgent);
 
 //Habitations
 router.get('/habitations', HabitationController.habitations);

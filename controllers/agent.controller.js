@@ -29,9 +29,11 @@ const createAgent = catchAsync(async (req, res) => {
         //res.send(req.body);
         //console.log(req.body.matricule);
 
-        if (!matricule || !lastname || !firstname) {
+        //if (!req.body.matricule || !lastname || !firstname) {
+        if (!matricule) {
+            //console.log(req);
             req.flash('error', 'Certains champs ne peuvent pas être vides!');
-            //res.redirect('/agent/create');
+            //res.redirect('/agents/create');
             return;
         }
 
@@ -53,7 +55,7 @@ const createAgent = catchAsync(async (req, res) => {
     } catch (err) {
         console.log(err);
         req.flash('error', "Erreur lors de la création de l'agent");
-        res.redirect('/agent/create');
+        res.redirect('/agents/create');
     }
 });
 
@@ -63,7 +65,7 @@ const updateAgent = async (req, res) => {
     try {
         if (!matricule || !lastname || !firstname) {
             req.flash('error', 'Certains champs ne peuvent pas être vides!');
-            res.redirect(`/agent/${id}`);
+            res.redirect(`/agents/${id}`);
             return;
         }
 
@@ -89,7 +91,7 @@ const updateAgent = async (req, res) => {
     } catch (err) {
         console.log(err);
         req.flash('error', "Erreur lors de la création de l'agent");
-        res.redirect('/agent/create');
+        res.redirect('/agents/create');
     }
 };
 
@@ -125,7 +127,7 @@ const fillForm = async (req, res) => {
     try {
         if (!idAgent) {
             //req.flash('error', 'Le matricule ne doit pas être vide!');
-            res.redirect('/agent/create');
+            res.redirect('/agents/create');
             return;
         }
         const detailsAgent = await Agent.findAll({
@@ -147,7 +149,7 @@ const fillForm = async (req, res) => {
     } catch (err) {
         console.log(err);
         req.flash('error', "Erreur lors de l'update de l'agent");
-        res.redirect('/agent/create');
+        res.redirect('/agents/create');
     }
 };
 

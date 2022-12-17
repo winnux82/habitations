@@ -1,7 +1,7 @@
 const express = require('express');
 const session = require('express-session');
-const favicon = require('serve-favicon');
 const flash = require('connect-flash');
+const favicon = require('serve-favicon');
 const morgan = require('morgan');
 const path = require('path');
 const { success } = require('./helpers/helper');
@@ -52,8 +52,8 @@ app.use(express.static('public'))
             //cookie: { secure: true }
         })
     )
-
     .use(flash())
+
     .use('/', portailRoutes)
     .use(morgan('dev'))
     .use(favicon(__dirname + '/favicon.ico'))

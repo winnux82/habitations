@@ -1,0 +1,12 @@
+express myapp --view="pug"
+express myapp --view="ejs"
+
+
+.env doesn't work
+
+javascript files on javascripts
+
+
+        <!-- <div id="loader">
+            <%= loaderHTML %>
+        </div> -->

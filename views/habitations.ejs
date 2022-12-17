@@ -3,16 +3,43 @@
 
 <head>
     <%- include('partials/head') %>
-        <style>
-            #form {
-                display: none;
-            }
-        </style>
+
         <%- include('partials/scripts') %>
 </head>
 
 <body>
     <%- include('partials/nav') %>
+        <div class="row" id="loader">
+
+            <div class="col d-flex justify-content-center">
+                <div class="lds-facebook">
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                </div>
+            </div>
+        </div>
+        <script>
+            window.onload = function () {
+                //('#loader').hide;
+                $('#loader').css('display', 'none');
+                $('#container-table').css('display', 'block')
+                // document.getElementById("loader").style.display = "none";
+                //$('#loader, #container-table').toggle();
+            }
+
+            window.onbeforeunload = function () {
+                //$('#loader').show;
+                $('#loader').css('display', 'block');
+                $('#container-table').css('display', 'none')
+                // $('#container-table').hide;
+                // document.getElementById("loader").style.display = "block";
+                //$('#loader, #container-table').toggle();
+            }
+
+
+        </script>
+
         <div class="container-lg" id="container-table">
             <h1 class="mt-5 mb-5"><i class="fa-solid fa-location-dot" aria-hidden="true"></i> Liste des habitations
             </h1>

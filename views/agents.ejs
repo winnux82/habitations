@@ -3,32 +3,7 @@
 
 <head>
     <%- include('partials/head') %>
-        <style>
-            #form {
-                display: none;
-                height: 700px;
-                /* left: -100%;
 
-                -webkit-box-shadow: inset 1px 0px 1px 0px rgba(232, 232, 232, 1);
-                -moz-box-shadow: inset 1px 0px 1px 0px rgba(232, 232, 232, 1);
-                box-shadow: inset 1px 0px 1px 0px rgba(232, 232, 232, 1);
-                transition: 1s ease-out;
-                opacity: 0; */
-            }
-
-            #container-table {
-                height: 700px;
-            }
-
-            #show-form {
-                left: 500px;
-                opacity: 1;
-            }
-
-            #spanChiffre {
-                color: rgb(247, 70, 70);
-            }
-        </style>
         <%- include('partials/scripts') %>
 </head>
 
@@ -65,10 +40,10 @@
                         <td>
                             <%= agent.tel %>
                         </td>
-                        <td><a href="../agent/<%= agent.id %>/"
+                        <td><a href="../agents/<%= agent.id %>/"
                                 class="link-light badge bg-primary rounded-pill">Modifier</a></td>
                         <td><a onclick="return confirm('Voulez-vous vraiment supprimer cet élement ?')"
-                                href="../agent/<%= agent.id %>/delete"
+                                href="../agents/<%= agent.id %>/delete"
                                 class="link-light badge bg-danger rounded-pill">Supprimer</a></td>
                     </tr>
                     <% }) %>
@@ -77,7 +52,7 @@
 
         <div class="container-lg" id="form">
 
-            <form action="/agent/create" method="POST">
+            <form action="/agents/create" method="POST">
                 <h1 class="mt-5 mb-5"><i class="fa-solid fa-user" aria-hidden="true"></i> Agents </h1>
                 <button id="btn-cancel" type="button" class="btn btn-danger mb-4">Annuler</button>
                 <fieldset>
