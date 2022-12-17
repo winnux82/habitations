@@ -9,199 +9,174 @@
 
 <body>
     <%- include('partials/nav') %>
-        <div class="row" id="loader">
+        <%- include('partials/loader') %>
 
-            <div class="col d-flex justify-content-center">
-                <div class="lds-facebook">
-                    <div></div>
-                    <div></div>
-                    <div></div>
-                </div>
-            </div>
-        </div>
-        <script>
-            window.onload = function () {
-                //('#loader').hide;
-                $('#loader').css('display', 'none');
-                $('#container-table').css('display', 'block')
-                // document.getElementById("loader").style.display = "none";
-                //$('#loader, #container-table').toggle();
-            }
-
-            window.onbeforeunload = function () {
-                //$('#loader').show;
-                $('#loader').css('display', 'block');
-                $('#container-table').css('display', 'none')
-                // $('#container-table').hide;
-                // document.getElementById("loader").style.display = "block";
-                //$('#loader, #container-table').toggle();
-            }
-
-
-        </script>
-
-        <div class="container-lg" id="container-table">
-            <h1 class="mt-5 mb-5"><i class="fa-solid fa-location-dot" aria-hidden="true"></i> Liste des habitations
-            </h1>
-            <button class="btn btn-success mb-4" id="add">Ajouter</button>
-            <table border="1" class="table table-hover table-light" id="tableauHabitations">
-                <thead class="thead-light">
-                    <tr>
-                        <th>id</th>
-                        <th>Adresse</th>
-                        <th>Localité</th>
-                        <th>Date Début</th>
-                        <th>Date Fin</th>
-                        <th>Modifier</th>
-                        <th>Supprimer</th>
-
-                    </tr>
-                </thead>
-                <% habitations.forEach((habitation)=> { %>
-                    <tr class="table-row" data-href="habitations.php?id=' . $Infos['id'] . '">
-                    <tr class="clickable-row" data-href="url://habitations.php?id=' . $Infos['id'] . '">
-                        <td>
-                            <%= habitation.id %>
-                        </td>
-                        <td>
-                            <%= habitation.adresse %>
-                        </td>
-                        <td>
-                            <%= habitation.localite %>
-                        </td>
-                        <td>
-                            <%= habitation.datedebut %>
-                        </td>
-                        <td>
-                            <%= habitation.datefin %>
-                        </td>
-                        <td><a href="../habitation/<%= habitation.id %>/"
-                                class="link-light badge bg-primary rounded-pill">Modifier</a></td>
-                        <td><a onclick="return confirm('Voulez-vous vraiment supprimer cet élement ?')"
-                                href="../habitation/<%= habitation.id %>/delete"
-                                class="link-light badge bg-danger rounded-pill">Supprimer</a>
-                        </td>
-                    </tr>
-                    <% }) %>
-            </table>
-
-
-
-
-        </div>
-        <div class="container-lg" id="form">
-
-            <form action="/habitation/create" method="POST">
+            <div class="container-lg" id="container-table">
                 <h1 class="mt-5 mb-5"><i class="fa-solid fa-location-dot" aria-hidden="true"></i> Liste des habitations
                 </h1>
-                <button id="btn-cancel" type="button" class="btn btn-danger mb-4">Annuler</button>
-                <fieldset>
+                <button class="btn btn-success mb-4" id="add">Ajouter</button>
+                <table border="1" class="table table-hover table-light" id="tableauHabitations">
+                    <thead class="thead-light">
+                        <tr>
+                            <th>id</th>
+                            <th>Adresse</th>
+                            <th>Localité</th>
+                            <th>Date Début</th>
+                            <th>Date Fin</th>
+                            <th>Modifier</th>
+                            <th>Supprimer</th>
 
-                    <legend>Ajouter une surveillance d'habitation</legend>
+                        </tr>
+                    </thead>
+                    <% habitations.forEach((habitation)=> { %>
+                        <tr class="table-row" data-href="habitations.php?id=' . $Infos['id'] . '">
+                        <tr class="clickable-row" data-href="url://habitations.php?id=' . $Infos['id'] . '">
+                            <td>
+                                <%= habitation.id %>
+                            </td>
+                            <td>
+                                <%= habitation.adresse %>
+                            </td>
+                            <td>
+                                <%= habitation.localite %>
+                            </td>
+                            <td>
+                                <%= habitation.datedebut %>
+                            </td>
+                            <td>
+                                <%= habitation.datefin %>
+                            </td>
+                            <td><a href="../habitation/<%= habitation.id %>/"
+                                    class="link-light badge bg-primary rounded-pill">Modifier</a></td>
+                            <td><a onclick="return confirm('Voulez-vous vraiment supprimer cet élement ?')"
+                                    href="../habitation/<%= habitation.id %>/delete"
+                                    class="link-light badge bg-danger rounded-pill">Supprimer</a>
+                            </td>
+                        </tr>
+                        <% }) %>
+                </table>
 
-                    <table>
-                        <div class="input-group mb-3">
-                            <div class="m-1">
-                                <tr>
-                                    <td>
-                                        ID :
-                                    </td>
-                                    <td><input type="text" class="form-control m-1" name="id" value=""></td>
-                                </tr>
-                                <tr>
-                                    <td>Demandeur : </td>
-                                    <td>
-                                        <div class="input-group m-1">
-                                            <input type="text" class="form-control m-1" maxlength="50" name="demandeur"
-                                                required autofocus placeholder="Obligatoire" value="">
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>Adresse : </td>
-                                    <td>
-                                        <div class="input-group m-1">
-                                            <input type="text" class="form-control m-1" maxlength="50" name="adresse"
-                                                required placeholder="Obligatoire" value="">
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>Localité : </td>
-                                    <td><input type="number" class="form-control m-1" maxlength="10" name="localite"
-                                            required placeholder="Obligatoire" value=""></td>
-                                </tr>
-                                <tr>
-                                    <td>Date début : </td>
-                                    <td><input type="datetime-local" class="form-control m-1" name="datedebut" value="">
-                                    </td>
-                                </tr>
 
-                                <tr>
-                                    <td>Date de fin : </td>
-                                    <td><input type="datetime-local" class="form-control m-1" name="datefin" value="">
-                                    </td>
-                                </tr>
 
-                                <tr>
-                                    <td>Mesures: </td>
-                                    <td>
-                                        <textarea class="form-control" id="txtArea" name="mesures" rows="4"
-                                            cols="48"></textarea>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>Véhicule : </td>
-                                    <td><input type="text" class="form-control m-1" maxlength="50" name="vehicule"
-                                            placeholder="Ex. Marque Modèle Plaque garage" value=""></td>
-                                </tr>
-                                <tr>
-                                    <td><label class="form-label"></label></td>
-                                    <td></td>
-                                </tr>
 
-                                <div class="button-group m-3">
+            </div>
+            <div class="container-lg" id="form">
+
+                <form action="/habitation/create" method="POST">
+                    <h1 class="mt-5 mb-5"><i class="fa-solid fa-location-dot" aria-hidden="true"></i> Liste des
+                        habitations
+                    </h1>
+                    <button id="btn-cancel" type="button" class="btn btn-danger mb-4">Annuler</button>
+                    <fieldset>
+
+                        <legend>Ajouter une surveillance d'habitation</legend>
+
+                        <table>
+                            <div class="input-group mb-3">
+                                <div class="m-1">
                                     <tr>
                                         <td>
-                                            <input type="reset" name="bInit" value="Réinitialiser"
-                                                class="btn bg-danger
-                                                                                                        m-1 text-white" />
+                                            ID :
                                         </td>
+                                        <td><input type="text" class="form-control m-1" name="id" value=""></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Demandeur : </td>
                                         <td>
-                                            &nbsp;<input type="submit" name="bAjouthabitation" value="Ajouter"
-                                                class="btn btn-primary m-1">
+                                            <div class="input-group m-1">
+                                                <input type="text" class="form-control m-1" maxlength="50"
+                                                    name="demandeur" required autofocus placeholder="Obligatoire"
+                                                    value="">
+                                            </div>
                                         </td>
                                     </tr>
+                                    <tr>
+                                        <td>Adresse : </td>
+                                        <td>
+                                            <div class="input-group m-1">
+                                                <input type="text" class="form-control m-1" maxlength="50"
+                                                    name="adresse" required placeholder="Obligatoire" value="">
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>Localité : </td>
+                                        <td><input type="number" class="form-control m-1" maxlength="10" name="localite"
+                                                required placeholder="Obligatoire" value=""></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Date début : </td>
+                                        <td><input type="datetime-local" class="form-control m-1" name="datedebut"
+                                                value="">
+                                        </td>
+                                    </tr>
+
+                                    <tr>
+                                        <td>Date de fin : </td>
+                                        <td><input type="datetime-local" class="form-control m-1" name="datefin"
+                                                value="">
+                                        </td>
+                                    </tr>
+
+                                    <tr>
+                                        <td>Mesures: </td>
+                                        <td>
+                                            <textarea class="form-control" id="txtArea" name="mesures" rows="4"
+                                                cols="48"></textarea>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>Véhicule : </td>
+                                        <td><input type="text" class="form-control m-1" maxlength="50" name="vehicule"
+                                                placeholder="Ex. Marque Modèle Plaque garage" value=""></td>
+                                    </tr>
+                                    <tr>
+                                        <td><label class="form-label"></label></td>
+                                        <td></td>
+                                    </tr>
+
+                                    <div class="button-group m-3">
+                                        <tr>
+                                            <td>
+                                                <input type="reset" name="bInit" value="Réinitialiser"
+                                                    class="btn bg-danger
+                                                                                                        m-1 text-white" />
+                                            </td>
+                                            <td>
+                                                &nbsp;<input type="submit" name="bAjouthabitation" value="Ajouter"
+                                                    class="btn btn-primary m-1">
+                                            </td>
+                                        </tr>
+                                    </div>
                                 </div>
-                            </div>
-                    </table>
+                        </table>
 
-                </fieldset>
-            </form>
+                    </fieldset>
+                </form>
 
-            <% if (errors.length) { %>
+                <% if (errors.length) { %>
 
-                <div class="alert alert-danger mt-4 mb-2" role="alert">
-                    <%= errors[0] %>
-                </div>
+                    <div class="alert alert-danger mt-4 mb-2" role="alert">
+                        <%= errors[0] %>
+                    </div>
 
-                <% } %>
-        </div>
-        <script type="text/javascript">
-            const containerTable = document.getElementById('container-table');
-            const form = document.getElementById('form');
+                    <% } %>
+            </div>
+            <script type="text/javascript">
+                const containerTable = document.getElementById('container-table');
+                const form = document.getElementById('form');
 
-            function toggleForm() {
+                function toggleForm() {
 
-                $('#container-table, #form').toggle();
-            }
+                    $('#container-table, #form').toggle();
+                }
 
-            $('#add, #btn-cancel').click(() => toggleForm());
+                $('#add, #btn-cancel').click(() => toggleForm());
 
-        </script>
-        <%- include('partials/footer') %>
+            </script>
+            <%- include('partials/footer') %>
 
-            <%- include('partials/scripts') %>
+                <%- include('partials/scripts') %>
 </body>
 
 </html>
