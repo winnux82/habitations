@@ -3,10 +3,36 @@ express myapp --view="ejs"
 
 
 .env doesn't work
+requete SQL
+
 
 javascript files on javascripts
 
 
-        <!-- <div id="loader">
+<!-- <div id="loader">
             <%= loaderHTML %>
         </div> -->
+
+sudo do-release-upgrade
+
+<div>
+    <a href="/habitations/validation/" id="radio1">
+        <input type="radio" name="radio" id="radio1" class="radio" <%=(url.includes('/habitations/validation/7711'))
+            ? '' : 'checked' %> />
+        <label for="radio1">Toutes</label>
+    </a>
+</div>
+
+<div>
+    <a href="/habitations/validation/7711" id="radio2">
+        <input type="radio" name="radio" id="radio2" class="radio" <%=(url.includes('/habitations/validation/7711'))
+            ? 'checked' : '' %> />
+        <label for="radio2">Dottignies</label></a>
+</div>
+
+<div>
+    <a href="/habitations/validation/7712" id="radio3">
+        <input type="radio" name="radio" id="radio3" class="radio" <%=(url.includes('/habitations/validation/7711'))
+            ? '' : 'checked' %> />
+        <label for="radio3">Herseaux</label></a>
+</div>

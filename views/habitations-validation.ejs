@@ -20,7 +20,36 @@
         <div class="container-lg" id="container-table">
             <h1 class="mt-5 mb-5"><i class="fa-solid fa-location-dot" aria-hidden="true"></i> Liste des habitations
             </h1>
+            <!-- Boutons radio -->
+            <div class="button-container">
 
+                <div class="button-radio">
+                    <a href="/habitations/validation/7700" id="radio1">
+                        <input type="radio" name="radio" id="radio1" class="radio" checked />
+                        <label for="radio1">Toutes</label>
+                    </a>
+                </div>
+
+                <div class="button-radio">
+                    <a href="/habitations/validation/7711" id="radio2">
+                        <input type="radio" name="radio" id="radio2" class="radio" />
+                        <label for="radio2">Dottignies</label></a>
+                </div>
+
+                <div class="button-radio">
+                    <a href="/habitations/validation/7712" id="radio3">
+                        <input type="radio" name="radio" id="radio3" class="radio" />
+                        <label for="radio3">Herseaux</label></a>
+                </div>
+
+                <div class="button-radio">
+                    <a href="/habitations/validation/7700" id="radio3">
+                        <input type="radio" name="radio" id="radio4" class="radio" />
+                        <label for="radio4">Luingne</label></a>
+                </div>
+            </div>
+
+            <!-- Liste des habitations -->
             <div class="container mt-5">
                 <% habitations.forEach((habitation)=> {
                     var color;

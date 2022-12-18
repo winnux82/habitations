@@ -27,7 +27,11 @@ router.get('/habitation/:id/delete', HabitationController.deleteHabitation);
 router.get('/habitation/:id/', HabitationController.fillForm);
 router.post('/habitation/:id/update', HabitationController.updateHabitation);
 router.get(
-    '/habitations/validation',
+    '/habitations/validation/:localite',
     HabitationController.validationHabitation
 );
+// router.get(
+//     '/habitations/validation/:localite',
+//     HabitationController.validationSelection
+// );
 module.exports = router;
