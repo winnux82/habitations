@@ -24,49 +24,31 @@
             <div class="button-container">
 
                 <div class="button-radio">
-                    <a href="/habitations/validation/" id="radio1">
+                    <a href="/habitations/validation/7700" id="radio1">
                         <input type="radio" name="radio" id="radio1" class="radio" checked />
                         <label for="radio1">Toutes</label>
                     </a>
                 </div>
+
                 <div class="button-radio">
-                    <a href="/habitations/validation/Mouscron" id="radio1">
-                        <input type="radio" name="radio" id="radio1" class="radio" />
-                        <label for="radio1">Mouscron</label>
-                    </a>
-                </div>
-                <div class="button-radio">
-                    <a href="/habitations/validation/Dottignies" id="radio2">
+                    <a href="/habitations/validation/7711" id="radio2">
                         <input type="radio" name="radio" id="radio2" class="radio" />
                         <label for="radio2">Dottignies</label></a>
                 </div>
 
                 <div class="button-radio">
-                    <a href="/habitations/validation/Herseaux" id="radio3">
+                    <a href="/habitations/validation/7712" id="radio3">
                         <input type="radio" name="radio" id="radio3" class="radio" />
                         <label for="radio3">Herseaux</label></a>
                 </div>
 
                 <div class="button-radio">
-                    <a href="/habitations/validation/Luingne" id="radio3">
+                    <a href="/habitations/validation/7700" id="radio3">
                         <input type="radio" name="radio" id="radio4" class="radio" />
                         <label for="radio4">Luingne</label></a>
                 </div>
             </div>
-            <script>
-                const currentUrl = window.location.href;
-                const buttons = document.querySelectorAll('.button-radio a');
 
-                buttons.forEach(button => {
-                    const buttonUrl = button.getAttribute('href');
-                    const input = button.querySelector('input');
-                    if (buttonUrl === currentUrl) {
-                        input.setAttribute('checked', true);
-                    } else {
-                        input.setAttribute('checked', false);
-                    }
-                });
-            </script>
             <!-- Liste des habitations -->
             <div class="container mt-5">
                 <% habitations.forEach((habitation)=> {

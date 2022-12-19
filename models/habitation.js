@@ -13,8 +13,12 @@ const Habitation = db.define(
             type: Sequelize.STRING,
             allowNull: false,
         },
-        localite: {
+        cp: {
             type: Sequelize.INTEGER,
+            allowNull: false,
+        },
+        localite: {
+            type: Sequelize.STRING,
             allowNull: true,
         },
         demandeur: {
@@ -45,7 +49,7 @@ const Habitation = db.define(
     {
         timestamps: true,
         createdAt: 'created',
-        updatedAt: false,
+        updatedAt: 'updated',
     }
 );
 

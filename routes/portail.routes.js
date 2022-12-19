@@ -20,18 +20,15 @@ router.get('/agents/:id/delete', AgentController.deleteAgent);
 //Habitations
 router.get('/habitations', HabitationController.habitations);
 router.get('/habitations/json', HabitationController.getAll);
-router.post('/habitation/create', HabitationController.createHabitation);
-router.get('/habitation/create', HabitationController.createHabitationForm);
-
-router.get('/habitation/:id/delete', HabitationController.deleteHabitation);
-router.get('/habitation/:id/', HabitationController.fillForm);
-router.post('/habitation/:id/update', HabitationController.updateHabitation);
+router.post('/habitations/create', HabitationController.createHabitation);
+router.get('/habitations/create', HabitationController.createHabitationForm);
+router.get('/habitations/validation', HabitationController.habitationListe);
 router.get(
     '/habitations/validation/:localite',
-    HabitationController.validationHabitation
+    HabitationController.habitationListeLocalite
 );
-// router.get(
-//     '/habitations/validation/:localite',
-//     HabitationController.validationSelection
-// );
+router.get('/habitations/:id/', HabitationController.fillForm);
+router.post('/habitations/:id/update', HabitationController.updateHabitation);
+router.get('/habitations/:id/delete', HabitationController.deleteHabitation);
+
 module.exports = router;

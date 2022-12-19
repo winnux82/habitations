@@ -15,7 +15,7 @@ require('dotenv').config();
 const app = express();
 const port = 7700;
 
-const initAllRoutes = require('./routes');
+//const initAllRoutes = require('./routes');
 const portailRoutes = require('./routes/portail.routes');
 
 app.use(bp.json());

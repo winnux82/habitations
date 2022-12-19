@@ -3,7 +3,6 @@
 
 <head>
     <%- include('partials/head') %>
-
         <%- include('partials/scripts') %>
 </head>
 
@@ -15,11 +14,13 @@
                 <h1 class="mt-5 mb-5"><i class="fa-solid fa-location-dot" aria-hidden="true"></i> Liste des habitations
                 </h1>
                 <button class="btn btn-success mb-4" id="add">Ajouter</button>
+
                 <table border="1" class="table table-hover table-light" id="tableauHabitations">
                     <thead class="thead-light">
                         <tr>
                             <th>id</th>
                             <th>Adresse</th>
+                            <th>Code Postal</th>
                             <th>Localité</th>
                             <th>Date Début</th>
                             <th>Date Fin</th>
@@ -38,18 +39,22 @@
                                 <%= habitation.adresse %>
                             </td>
                             <td>
+                                <%= habitation.cp %>
+                            </td>
+                            <td>
                                 <%= habitation.localite %>
                             </td>
                             <td>
                                 <%= habitation.datedebut %>
+                                    <!-- .toLocaleDateString("fr-FR") -->
                             </td>
                             <td>
                                 <%= habitation.datefin %>
                             </td>
-                            <td><a href="../habitation/<%= habitation.id %>/"
+                            <td><a href="../habitations/<%= habitation.id %>/"
                                     class="link-light badge bg-primary rounded-pill">Modifier</a></td>
                             <td><a onclick="return confirm('Voulez-vous vraiment supprimer cet élement ?')"
-                                    href="../habitation/<%= habitation.id %>/delete"
+                                    href="../habitations/<%= habitation.id %>/delete"
                                     class="link-light badge bg-danger rounded-pill">Supprimer</a>
                             </td>
                         </tr>
@@ -62,7 +67,7 @@
             </div>
             <div class="container-lg" id="form">
 
-                <form action="/habitation/create" method="POST">
+                <form action="/habitations/create" method="POST">
                     <h1 class="mt-5 mb-5"><i class="fa-solid fa-location-dot" aria-hidden="true"></i> Liste des
                         habitations
                     </h1>
@@ -100,10 +105,47 @@
                                         </td>
                                     </tr>
                                     <tr>
-                                        <td>Localité : </td>
-                                        <td><input type="number" class="form-control m-1" maxlength="10" name="localite"
-                                                required placeholder="Obligatoire" value=""></td>
+                                        <td>Code Postal : </td>
+                                        <td>
+                                            <select class="form-control m-1" name="cp" required>
+                                                <option value="">Sélectionnez un code postal</option>
+                                                <option value="7700">7700</option>
+                                                <option value="7711">7711</option>
+                                                <option value="7712">7712</option>
+                                            </select>
+                                        </td>
                                     </tr>
+
+                                    <tr>
+                                        <td>Localité : </td>
+                                        <td>
+                                            <select class="form-control m-1" name="localite" required>
+                                                <option value="">Sélectionnez une localité</option>
+                                            </select>
+                                        </td>
+                                    </tr>
+
+                                    <script>
+                                        const cpToLocaliteMap = {
+                                            "7700": ["Mouscron", "Luingne"],
+                                            "7711": ["Dottignies"],
+                                            "7712": ["Herseaux"]
+                                        };
+                                        document.querySelector("select[name='cp']").addEventListener("change", event => {
+                                            const localiteSelect = document.querySelector("select[name='localite']");
+                                            const localites = cpToLocaliteMap[event.target.value];
+                                            if (localites) {
+                                                localiteSelect.innerHTML = `<option value="">Sélectionnez une localité</option>`;
+                                                for (const localite of localites) {
+                                                    localiteSelect.innerHTML += `<option value="${localite}">${localite}</option>`;
+                                                }
+                                            } else {
+                                                localiteSelect.innerHTML = `<option value="">Sélectionnez une localité</option>`;
+                                            }
+                                        });
+                                    </script>
+
+
                                     <tr>
                                         <td>Date début : </td>
                                         <td><input type="datetime-local" class="form-control m-1" name="datedebut"

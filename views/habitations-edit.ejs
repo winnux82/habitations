@@ -9,7 +9,7 @@
     <%- include('partials/nav') %>
         <div class="container-lg" id="container-table">
 
-            <form action="/habitation/<%= id %>/update" method="POST">
+            <form action="/habitations/<%= id %>/update" method="POST">
                 <h1 class="mt-5 mb-5"><i class="fa-solid fa-location-dot" aria-hidden="true"></i> Liste des habitations
                 </h1>
                 <fieldset>
@@ -44,54 +44,99 @@
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td>Localité : </td>
-                                    <td><input type="number" class="form-control m-1" maxlength="10" name="localite"
-                                            required placeholder="Obligatoire" value="<%= localite %>"></td>
-                                </tr>
-                                <tr>
-                                    <td>Date début : </td>
-                                    <td><input type="datetime-local" class="form-control m-1" name="datedebut"
-                                            value="<%= datedebut %>">
-                                    </td>
-                                </tr>
-
-                                <tr>
-                                    <td>Date de fin : </td>
-                                    <td><input type="datetime-local" class="form-control m-1" name="datefin"
-                                            value="<%= datefin %>">
-                                    </td>
-                                </tr>
-
-                                <tr>
-                                    <td>Mesures: </td>
+                                    <td>Code Postal : </td>
                                     <td>
-                                        <textarea class="form-control" id="txtArea" name="mesures" rows="4"
-                                            cols="48"><%= mesures %></textarea>
+                                        <select class="form-control m-1" name="cp" required>
+                                            <option value="">
+                                                <%= cp ??'Sélectionnez un code postal' %>
+                                            </option>
+                                            <option value="7700">7700</option>
+                                            <option value="7711">7711</option>
+                                            <option value="7712">7712</option>
+                                        </select>
                                     </td>
                                 </tr>
+
                                 <tr>
-                                    <td>Véhicule : </td>
-                                    <td><input type="text" class="form-control m-1" maxlength="50" name="vehicule"
-                                            placeholder="Ex. Marque Modèle Plaque garage" value="<%= vehicule %>"></td>
-                                </tr>
-                                <tr>
-                                    <td><label class="form-label"></label></td>
-                                    <td></td>
+                                    <td>Localité : </td>
+                                    <td>
+                                        <select class="form-control m-1" name="localite" required>
+                                            <option value="">
+                                                <%= localite ??'Sélectionnez une localité'%>
+                                            </option>
+                                        </select>
+                                    </td>
                                 </tr>
 
-                                <div class="button-group m-3">
+                                <script>
+                                    const cpToLocaliteMap = {
+                                        "7700": ["Mouscron", "Luingne"],
+                                        "7711": ["Dottignies"],
+                                        "7712": ["Herseaux"]
+                                    };
+                                    document.querySelector("select[name='cp']").addEventListener("change", event => {
+                                        const localiteSelect = document.querySelector("select[name='localite']");
+                                        const localites = cpToLocaliteMap[event.target.value];
+                                        if (localites) {
+                                            localiteSelect.innerHTML = `<option value="">Sélectionnez une localité</option>`;
+                                            for (const localite of localites) {
+                                                localiteSelect.innerHTML += `<option value="${localite}">${localite}</option>`;
+                                            }
+                                        } else {
+                                            localiteSelect.innerHTML = `<option value="">Sélectionnez une localité</option>`;
+                                        }
+                                    });
+                                </script>
+                                <% const formattedDatedebut=new Date(datedebut).toISOString().slice(0, -1); const
+                                    formattedDatefin=new Date(datefin).toISOString().slice(0, -1); %>
+
                                     <tr>
-                                        <td>
-                                            <input type="reset" name="bInit" value="Réinitialiser"
-                                                class="btn bg-danger
-                                                                                                            m-1 text-white" />
+                                        <td>Date début :
                                         </td>
-                                        <td>
-                                            &nbsp;<input type="submit" name="bModifhabitation" value="Modifier"
-                                                class="btn btn-primary m-1">
+                                        <td><input type="datetime-local" class="form-control m-1" name="datedebut"
+                                                value="<%= formattedDatedebut %>">
+
                                         </td>
                                     </tr>
-                                </div>
+
+                                    <tr>
+                                        <td>Date de fin : </td>
+                                        <td><input type="datetime-local" class="form-control m-1" name="datefin"
+                                                value="<%= formattedDatefin %>">
+                                        </td>
+                                    </tr>
+
+                                    <tr>
+                                        <td>Mesures: </td>
+                                        <td>
+                                            <textarea class="form-control" id="txtArea" name="mesures" rows="4"
+                                                cols="48"><%= mesures %></textarea>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>Véhicule : </td>
+                                        <td><input type="text" class="form-control m-1" maxlength="50" name="vehicule"
+                                                placeholder="Ex. Marque Modèle Plaque garage" value="<%= vehicule %>">
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td><label class="form-label"></label></td>
+                                        <td></td>
+                                    </tr>
+
+                                    <div class="button-group m-3">
+                                        <tr>
+                                            <td>
+                                                <input type="reset" name="bInit" value="Réinitialiser"
+                                                    class="btn bg-danger
+                                                                                                            m-1 text-white" />
+                                            </td>
+                                            <td>
+                                                &nbsp;<input type="submit" name="bModifhabitation" value="Modifier"
+                                                    class="btn btn-primary m-1">
+                                            </td>
+                                        </tr>
+                                    </div>
                             </div>
                     </table>
 
