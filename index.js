@@ -8,7 +8,9 @@ const { success } = require('./helpers/helper');
 const bp = require('body-parser');
 const prettier = require('prettier');
 
-require('dotenv').config();
+// const env = require('dotenv').config();
+
+// console.log(env);
 
 // const sequelize = require('./config/sequelize')
 
@@ -16,7 +18,8 @@ const app = express();
 const port = 7700;
 
 //const initAllRoutes = require('./routes');
-const portailRoutes = require('./routes/portail.routes');
+const portailRoutes = require('./routes copy/portailsave.routes');
+// const agentsRoutes = require('./routes/agents.routes');
 
 app.use(bp.json());
 app.use(bp.urlencoded({ extended: true }));
@@ -55,6 +58,7 @@ app.use(express.static('public'))
     .use(flash())
 
     .use('/', portailRoutes)
+    // .use('/agents', agentsRoutes)
     .use(morgan('dev'))
     .use(favicon(__dirname + '/favicon.ico'))
     .use((use, res) => {

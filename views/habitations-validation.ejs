@@ -24,36 +24,46 @@
             <div class="button-container">
 
                 <div class="button-radio">
-                    <a href="/habitations/validation/" id="radio1">
-                        <input type="radio" name="radio" id="radio1" class="radio" checked />
+                    <a href="/habitations/validation/">
+                        <input type="radio" name="radio" id="radio1" class="radio"
+                            <%=(url.includes('/habitations/validation/')) ? '' : 'checked' %> />
                         <label for="radio1">Toutes</label>
                     </a>
                 </div>
                 <div class="button-radio">
-                    <a href="/habitations/validation/Mouscron" id="radio1">
-                        <input type="radio" name="radio" id="radio1" class="radio" />
-                        <label for="radio1">Mouscron</label>
+                    <a href="/habitations/validation/Mouscron">
+                        <input type="radio" name="radio" id="radio2" class="radio"
+                            <%=(url.includes('/habitations/validation/Mouscron')) ? '' : 'checked' %> />
+                        <label for="radio2">Moucron</label>
                     </a>
                 </div>
                 <div class="button-radio">
-                    <a href="/habitations/validation/Dottignies" id="radio2">
-                        <input type="radio" name="radio" id="radio2" class="radio" />
-                        <label for="radio2">Dottignies</label></a>
+                    <a href="/habitations/validation/Dottignies">
+                        <input type="radio" name="radio" id="radio3" class="radio"
+                            <%=(url.includes('/habitations/validation/Dottignies')) ? '' : 'checked' %> />
+                        <label for="radio3">Dottignies</label>
+                    </a>
+                </div>
+                <div class="button-radio">
+                    <a href="/habitations/validation/Luingne">
+                        <input type="radio" name="radio" id="radio4" class="radio"
+                            <%=(url.includes('/habitations/validation/Luingne')) ? '' : 'checked' %> />
+                        <label for="radio4">Luingne</label>
+                    </a>
+                </div>
+                <div class="button-radio">
+                    <a href="/habitations/validation/Herseaux">
+                        <input type="radio" name="radio" id="radio5" class="radio"
+                            <%=(url.includes('/habitations/validation/Herseaux')) ? '' : 'checked' %> />
+                        <label for="radio5">Herseaux</label>
+                    </a>
                 </div>
 
-                <div class="button-radio">
-                    <a href="/habitations/validation/Herseaux" id="radio3">
-                        <input type="radio" name="radio" id="radio3" class="radio" />
-                        <label for="radio3">Herseaux</label></a>
-                </div>
-
-                <div class="button-radio">
-                    <a href="/habitations/validation/Luingne" id="radio3">
-                        <input type="radio" name="radio" id="radio4" class="radio" />
-                        <label for="radio4">Luingne</label></a>
-                </div>
             </div>
-            <script>
+
+
+            <a href="/habitations/validation/Luingne"><button>ESSAI LUINGNE</button></a>
+            <!-- <script>
                 const currentUrl = window.location.href;
                 const buttons = document.querySelectorAll('.button-radio a');
 
@@ -66,8 +76,9 @@
                         input.setAttribute('checked', false);
                     }
                 });
-            </script>
+            </script> -->
             <!-- Liste des habitations -->
+
             <div class="container mt-5">
                 <% habitations.forEach((habitation)=> {
                     var color;
@@ -116,14 +127,7 @@
 
                                     <% let mesures=habitation.mesures %>
                                         <%=mesures.split("-").join("\n"); %>
-                                            qsdf
-                                            qsdf
 
-                                            qsdf
-                                            qs
-                                            dqfsjfgsidjfgms dfijgsdmfigjs dmfigjsdm gfijdsimgj sdmifgj fdsmgjsimgj
-                                            dsmigjidsmfjgmsdifjgsmdifgjsdmfjgmsidfjg isdmogfjisdgfj imsdjfg imsdfgjisgdf
-                                            jids mjgmdsiojgsdmiogjisdgj dmsjgsdimgj<br>dfqijfliqsjfmqs
                                 </div>
                                 <ul class="postcard__tagbox">
                                     <li class="tag__item"><i class="fas fa-tag mr-2"></i>

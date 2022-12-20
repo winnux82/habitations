@@ -2,8 +2,20 @@ express myapp --view="pug"
 express myapp --view="ejs"
 
 
+date format
+
+requete SQL...
+
+refresh 
+
+no localité
+
 .env doesn't work
-requete SQL
+
+
+
+
+
 
 
 javascript files on javascripts

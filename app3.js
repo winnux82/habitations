@@ -9,18 +9,25 @@ const bp = require('body-parser');
 const prettier = require('prettier');
 
 // const env = require('dotenv').config();
+
 // console.log(env);
 
-const Routes = require('./routes');
-// const portailRoutes = require('./routes/portail.routes');
-//const { portailRoutes } = require('./routes');
+const portailRoutes = require('./routes/portail.routes');
+// const agentsRoutes = require('./routes/agents.routes');
+// const habitationsRoutes = require('./routes/habitations.routes');
+// const sequelize = require('./config/sequelize')
 
 const app = express();
+const port = 7700;
+
+//const initAllRoutes = require('./routes');
+// const agentsRoutes = require('./routes/agents.routes');
 
 app.use(bp.json());
 app.use(bp.urlencoded({ extended: true }));
 
 const db = require('./config/database');
+
 try {
     db.authenticate()
         .then((_) =>
@@ -35,6 +42,9 @@ try {
     console.error('Unable to connect to the database:', error);
 }
 
+app.get('/', (req, res) => {
+    res.redirect('/habitations');
+});
 app.use(express.static(__dirname + '/public'));
 app.set('view engine', 'ejs').set('views', path.join(__dirname, 'views'));
 
@@ -50,14 +60,22 @@ app.use(express.static('public'))
     )
     .use(flash())
 
-    .set('/', Routes)
-
+    .use('/', portailRoutes)
+    // .use('/agents', agentsRoutes)
+    // .use('/habitations', habitationsRoutes)
+    // .use('/agents', agentsRoutes)
     .use(morgan('dev'))
     .use(favicon(__dirname + '/favicon.ico'))
     .use((use, res) => {
         res.status(404);
         res.redirect('/404');
     });
+
+// app.listen(port, () => {
+//     console.log(
+//         `L\'application GDP est démarrée sur : http://localhost:${port}`
+//     );
+// });
 
 app.use(function (err, req, res, next) {
     // set locals, only providing error in development

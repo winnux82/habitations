@@ -6,7 +6,13 @@ const habitations = catchAsync(async (req, res) => {
     //     "select*, DATE_FORMAT(datedebut,'%d-%m-%Y %H:%i') as dateDebutFormat, DATE_FORMAT(datefin,'%d-%m-%Y %H:%i') as dateFinFormat from gdp.habitations where datedebut <= now() and datefin >= now() order by datedebut asc"
     // );
     // console.log(results, metadata);
-    const habitations = await Habitation.findAll();
+    const habitations = await Habitation.findAll({
+        where: {
+            datedebut: {
+                gte: new Date(),
+            },
+        },
+    });
 
     //console.log('All habitations:', JSON.stringify(habitations, null, 2));
 
@@ -169,7 +175,7 @@ const fillForm = async (req, res) => {
         res.redirect('/habitations/create');
     }
 };
-const habitationListe = catchAsync(async (req, res) => {
+const habitationList = catchAsync(async (req, res) => {
     const habitations = await Habitation.findAll({});
 
     res.render('habitations-validation', {
@@ -179,13 +185,11 @@ const habitationListe = catchAsync(async (req, res) => {
         errors: req.flash('error'),
     });
 });
-const habitationListeLocalite = catchAsync(async (req, res) => {
+const habitationListByLocality = catchAsync(async (req, res) => {
     const localite = req.params.localite;
     const habitations = await Habitation.findAll({
-        if(localite) {
-            where: {
-                localite: localite;
-            }
+        where: {
+            localite: localite,
         },
     });
     //res.json({ habitations });
@@ -204,6 +208,6 @@ module.exports = {
     deleteHabitation,
     fillForm,
     updateHabitation,
-    habitationListe,
-    habitationListeLocalite,
+    habitationList,
+    habitationListByLocality,
 };
