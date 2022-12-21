@@ -8,12 +8,8 @@ const { success } = require('./helpers/helper');
 const bp = require('body-parser');
 const prettier = require('prettier');
 
-// const env = require('dotenv').config();
-// console.log(env);
-
-const Routes = require('./routes');
-// const portailRoutes = require('./routes/portail.routes');
-//const { portailRoutes } = require('./routes');
+// const Routes = require('./routes');
+const MesRoutes = require('./routes/myroutes');
 
 const app = express();
 
@@ -34,7 +30,9 @@ try {
 } catch (error) {
     console.error('Unable to connect to the database:', error);
 }
-
+app.get('/', (req, res) => {
+    res.redirect('/habitations');
+});
 app.use(express.static(__dirname + '/public'));
 app.set('view engine', 'ejs').set('views', path.join(__dirname, 'views'));
 
@@ -49,9 +47,7 @@ app.use(express.static('public'))
         })
     )
     .use(flash())
-
-    .set('/', Routes)
-
+    .use('/', MesRoutes)
     .use(morgan('dev'))
     .use(favicon(__dirname + '/favicon.ico'))
     .use((use, res) => {

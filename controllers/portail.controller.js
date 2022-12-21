@@ -1,27 +1,30 @@
 //const Habitation = require('../models/Album')
-const catchAsync = require('../helpers/catchAsync')
-const path = require('path');
-const fs = require('fs');
+const catchAsync = require('../helpers/catchAsync');
 
+// portailRoutes.get('/', (req, res) => {
+//     res.redirect('/habitations');
+// });
 
-
-const admin = catchAsync(async(req, res) => {
-        res.render('admin', {
-            title: 'Administration',
-    });    
+const main = catchAsync(async (req, res) => {
+    res.render('home', {
+        title: 'Home',
+    });
 });
 
+const admin = catchAsync(async (req, res) => {
+    res.render('admin', {
+        title: 'Administration',
+    });
+});
 
-const err404 = catchAsync(async(req, res) => {
+const err404 = catchAsync(async (req, res) => {
     res.render('404', {
         title: 'Erreur 404',
-});    
+    });
 });
 
-
 module.exports = {
-    
+    main,
     admin,
     err404,
-
-}
+};

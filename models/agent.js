@@ -12,6 +12,9 @@ const Agent = db.define(
         lastname: {
             type: Sequelize.STRING,
             allowNull: true,
+            get() {
+                return this.getDataValue('lastname').toUpperCase();
+            },
         },
         firstname: {
             type: Sequelize.STRING,
@@ -46,7 +49,7 @@ const Agent = db.define(
 );
 
 Agent.sync().then(() => {
-    console.log('Table agents créée');
+    //console.log('Table agents créée');
 });
 
 module.exports = Agent;

@@ -29,4 +29,4 @@ HabitationsRoutes.get(
     '/habitations/:id/delete',
     HabitationController.deleteHabitation
 );
-module.exports = { HabitationsRoutes };
+module.exports = HabitationsRoutes;

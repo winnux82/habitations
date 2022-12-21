@@ -9,6 +9,4 @@ agentsRoutes.get('/agents/:id(d+)', AgentController.fillForm);
 agentsRoutes.post('/agents/:id/update', AgentController.updateAgent);
 agentsRoutes.get('/agents/:id/delete', AgentController.deleteAgent);
 
-module.exports = {
-    agentsRoutes,
-};
+module.exports = agentsRoutes;

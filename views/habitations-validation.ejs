@@ -22,47 +22,81 @@
             </h1>
             <!-- Boutons radio -->
             <div class="button-container">
+                <div class="button-radio">
+                    <input type="radio" name="radio" id="null" class="radio">
 
-                <div class="button-radio">
-                    <a href="/habitations/validation/">
-                        <input type="radio" name="radio" id="radio1" class="radio"
-                            <%=(url.includes('/habitations/validation/')) ? '' : 'checked' %> />
-                        <label for="radio1">Toutes</label>
-                    </a>
+                    <label for="null">Toutes</label>
                 </div>
                 <div class="button-radio">
-                    <a href="/habitations/validation/Mouscron">
-                        <input type="radio" name="radio" id="radio2" class="radio"
-                            <%=(url.includes('/habitations/validation/Mouscron')) ? '' : 'checked' %> />
-                        <label for="radio2">Moucron</label>
-                    </a>
-                </div>
-                <div class="button-radio">
-                    <a href="/habitations/validation/Dottignies">
-                        <input type="radio" name="radio" id="radio3" class="radio"
-                            <%=(url.includes('/habitations/validation/Dottignies')) ? '' : 'checked' %> />
-                        <label for="radio3">Dottignies</label>
-                    </a>
-                </div>
-                <div class="button-radio">
-                    <a href="/habitations/validation/Luingne">
-                        <input type="radio" name="radio" id="radio4" class="radio"
-                            <%=(url.includes('/habitations/validation/Luingne')) ? '' : 'checked' %> />
-                        <label for="radio4">Luingne</label>
-                    </a>
-                </div>
-                <div class="button-radio">
-                    <a href="/habitations/validation/Herseaux">
-                        <input type="radio" name="radio" id="radio5" class="radio"
-                            <%=(url.includes('/habitations/validation/Herseaux')) ? '' : 'checked' %> />
-                        <label for="radio5">Herseaux</label>
-                    </a>
-                </div>
+                    <input type="radio" name="radio" id="mouscron" class="radio">
 
+                    <label for="mouscron">Moucron</label>
+                </div>
+                <div class="button-radio">
+                    <input type="radio" name="radio" id="dottignies" class="radio">
+
+                    <label for="dottignies">Dottignies</label>
+                </div>
+                <div class="button-radio">
+                    <input type="radio" name="radio" id="luingne" class="radio">
+
+                    <label for="luingne">Luingne</label>
+                </div>
+                <div class="button-radio">
+                    <input type="radio" name="radio" id="herseaux" class="radio" />
+                    <label for="herseaux">Herseaux</label>
+                </div>
             </div>
 
+            <script>
+                // Store the selected radio button in a variable
+                let selectedRadio = null;
 
-            <a href="/habitations/validation/Luingne"><button>ESSAI LUINGNE</button></a>
+                document.querySelectorAll('.radio').forEach(function (radio) {
+                    radio.addEventListener('click', function () {
+                        // Uncheck all radio buttons
+                        document.querySelectorAll('.radio').forEach(function (radio) {
+                            radio.checked = false;
+                        });
+                        // Check the clicked radio button
+                        this.checked = true;
+                        // Store the selected radio button
+                        selectedRadio = this;
+                        // Redirect to the appropriate page
+                        switch (this.id) {
+                            case 'null':
+                                window.location = '/habitations/validation';
+                                selectedRadio.checked = true;
+                                console.log(selectedRadio.checked);
+                                break;
+                            case 'mouscron':
+                                window.location = '/habitations/validation/Mouscron';
+                                selectedRadio.checked = true;
+                                console.log(selectedRadio.checked);
+                                break;
+                            case 'dottignies':
+                                window.location = '/habitations/validation/Dottignies';
+                                selectedRadio.checked = true;
+                                console.log(selectedRadio.checked);
+                                break;
+                            case 'luingne':
+                                window.location = '/habitations/validation/Luingne';
+                                selectedRadio.checked = true;
+                                console.log(selectedRadio.checked);
+                                break;
+                            case 'herseaux':
+                                window.location = '/habitations/validation/Herseaux';
+                                selectedRadio.checked = true;
+                                console.log(selectedRadio.checked);
+                                break;
+                        }
+                    });
+                });
+
+
+
+
+            </script>
             <!-- <script>
                 const currentUrl = window.location.href;
                 const buttons = document.querySelectorAll('.button-radio a');

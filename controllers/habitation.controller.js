@@ -1,21 +1,33 @@
 const Habitation = require('../models/habitation');
 const catchAsync = require('../helpers/catchAsync');
+const moment = require('moment');
 
 const habitations = catchAsync(async (req, res) => {
-    // const [results, metadata] = await sequelize.query(
-    //     "select*, DATE_FORMAT(datedebut,'%d-%m-%Y %H:%i') as dateDebutFormat, DATE_FORMAT(datefin,'%d-%m-%Y %H:%i') as dateFinFormat from gdp.habitations where datedebut <= now() and datefin >= now() order by datedebut asc"
-    // );
-    // console.log(results, metadata);
     const habitations = await Habitation.findAll({
-        where: {
-            datedebut: {
-                gte: new Date(),
-            },
-        },
+        // where: {
+        //     datedebut: {
+        //         [Habitation.lte]: moment(new Date()).format('YYYY/MM/DD HH:mm'),
+        //     },
+        //     datefin: {
+        //         [Habitation.gte]: moment(new Date()).format('YYYY/MM/DD HH:mm'),
+        //     },
+        // },
+        // where: {
+        //     datedebut: {
+        //         [Habitation.lte]: moment(new Date()).format('YYYY/MM/DD hh:mm'),
+        //     },
+        //     datefin: {
+        //         [Habitation.gte]: moment(new Date()).format('YYYY/MM/DD hh:mm'),
+        //     },
+        // },
     });
 
-    //console.log('All habitations:', JSON.stringify(habitations, null, 2));
+    // habitations.forEach((element) => {
+    //     console.log(element.datedebut + '------');
+    //     console.log(moment(new Date()).format('YYYY/MM/DD HH:mm'));
+    // });
 
+    //console.log('All habitations:', JSON.stringify(habitations, null, 2));
     res.render('habitations', {
         title: 'Listing des habitations',
         //Habitations
@@ -68,7 +80,7 @@ const createHabitation = async (req, res) => {
         res.redirect('/habitations');
     } catch (err) {
         console.log(err);
-        //req.flash('error', 'Erreur lors de la création de l\'habitation');
+        req.flash('error', "Erreur lors de la création de l'habitation");
         res.redirect('/habitations/create');
     }
 };

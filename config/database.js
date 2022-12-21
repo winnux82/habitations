@@ -1,15 +1,13 @@
 const Sequelize = require('sequelize');
-//const dotenv = require('dotenv');
-//dotenv.config();
+require('dotenv').config({ path: '.env.config' });
 
-module.exports = new Sequelize('gdp', 'root', 'eleve', {
-    host: 'localhost',
-    dialect: 'mysql',
-    port: '3306',
-});
-
-// module.exports = new Sequelize('gdp', 'eleve', 'eleve', {
-//     host: 'localhost',
-//     dialect: 'mysql',
-//     port: '3307',
-// });
+module.exports = new Sequelize(
+    process.env.DB_NAME,
+    process.env.DB_USERNAME,
+    process.env.DB_PASS,
+    {
+        host: process.env.DB_HOST,
+        dialect: process.env.DB_DIALEC,
+        port: process.env.DB_PORT,
+    }
+);

@@ -4,13 +4,14 @@ const PortailController = require('../controllers/portail.controller');
 
 //Administration
 
-portailRoutes.get('/', (req, res) => {
-    res.redirect('/habitations');
-});
+// portailRoutes.get('/', (req, res) => {
+//     res.redirect('/habitations');
+// });
+portailRoutes.get('/', PortailController.main);
 portailRoutes.get('/admin', PortailController.admin);
 portailRoutes.get('/404', PortailController.err404);
 
-module.exports = { portailRoutes };
+module.exports = portailRoutes;
 
 // //Agents
 // router.get('/agents', AgentController.agents);
