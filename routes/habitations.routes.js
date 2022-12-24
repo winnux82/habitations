@@ -12,6 +12,10 @@ HabitationsRoutes.get(
     '/habitations/create',
     HabitationController.createHabitationForm
 );
+HabitationsRoutes.post(
+    '/habitations/validation',
+    HabitationController.habitationValidation
+);
 HabitationsRoutes.get(
     '/habitations/validation',
     HabitationController.habitationList

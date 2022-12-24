@@ -15,6 +15,14 @@ a:hover {
 
 
 
+.informationHabitation pre {
+  background-color: transparent;
+  border: 0px;
+  white-space: pre-wrap;
+  line-height: 1;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif
+}
+
 /* ----------------------------------------------------- Radio button ---------------------------------------------------------------*/
 
 
@@ -188,13 +196,26 @@ input.radio:focus~label:before {
 }
 
 .postcard .postcard__preview-txt {
+  display: none;
+  font-size: 1.75rem;
   overflow: hidden;
   text-overflow: ellipsis;
   text-align: justify;
   height: 100%;
   margin-left: 50px;
   margin-right: 50px;
+
 }
+
+
+
+.postcard .postcard__preview-txt pre {
+  background-color: transparent;
+  border: 0px;
+  line-height: 1;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif
+}
+
 
 .postcard .postcard__tagbox {
   display: flex;
@@ -434,5 +455,31 @@ input.radio:focus~label:before {
 
   .yellow:nth-child(2n)::before {
     background-image: linear-gradient(80deg, rgba(189, 187, 73, 0.1), transparent 50%);
+  }
+}
+
+.animated-fade-in {
+  animation: fade-in 1s ease-out;
+}
+
+@keyframes fade-in {
+  0% {
+    opacity: 0;
+  }
+
+  25% {
+    opacity: 0.25;
+  }
+
+  50% {
+    opacity: 0.5;
+  }
+
+  75% {
+    opacity: 0.75;
+  }
+
+  100% {
+    opacity: 1;
   }
 }

@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <%- include('partials/head') %>
+
+        <%- include('partials/scripts') %>
+</head>
+
+<body>
+    <%- include('partials/nav') %>
+        <div class="container-lg" id="container-table">
+            <h1 class="mt-5 mb-5"><i class="fa-solid fa-user" aria-hidden="true"></i> Liste des validations </h1>
+            <table border="1" class="table table-light table-hover ">
+                <thead class="thead-light">
+                    <tr>
+                        <th>id</th>
+                        <th>Adresse</th>
+                        <th>Agent</th>
+                        <th>Message</th>
+                        <th>Date</th>
+                        <th>Modifier</th>
+                        <th>Supprimer</th>
+                    </tr>
+                </thead>
+
+
+                <% validations.forEach((validation)=> { %>
+                    <tr class="table-row" data-href="validations.php?id=' . $Infos['id'] . '">
+                    <tr class="clickable-row" data-href="url://validations.php?id=' . $Infos['id'] . '">
+                        <td>
+                            <%= validation.id %>
+                        </td>
+                        <td>
+                            <%= validation.adresse %>
+                        </td>
+                        <td>
+                            <%= validation.agent %>
+                        </td>
+                        <td>
+                            <%= validation.message %>
+                        </td>
+                        <td>
+                            <%= validation.date %>
+                        </td>
+                        <td><a href="../validations/<%= validation.id %>/"
+                                class="link-light badge bg-primary rounded-pill">Modifier</a></td>
+                        <td><a onclick="return confirm('Voulez-vous vraiment supprimer cet élement ?')"
+                                href="../validations/<%= validation.id %>/delete"
+                                class="link-light badge bg-danger rounded-pill">Supprimer</a></td>
+                    </tr>
+                    <% }) %>
+            </table>
+        </div>
+
+
+
+        <%- include('partials/footer') %>
+            <%- include('partials/scripts') %>
+</body>
+
+</html>

@@ -14,7 +14,20 @@
                 <h1 class="mt-5 mb-5"><i class="fa-solid fa-location-dot" aria-hidden="true"></i> Liste des habitations
                 </h1>
                 <button class="btn btn-success mb-4" id="add">Ajouter</button>
+                <a href="/habitations/all"><button id="btn-all" type="button"
+                        class="btn btn-danger mb-4">Toutes</button></a>
+                <script>
+                    $(document).ready(function () {
+                        // Si la barre d'adresse contient "/all"
+                        if (window.location.href.indexOf('/all') > -1) {
+                            // Changer le nom du bouton en "Tri"
+                            $('#btn-all').text('Tri');
+                            // Changer l'adresse href de l'élément a en "/habitations"
+                            $('#btn-all').parent('a').attr('href', '/habitations');
+                        }
+                    });
 
+                </script>
                 <table border="1" class="table table-hover table-light" id="tableauHabitations">
                     <thead class="thead-light">
                         <tr>
@@ -72,6 +85,8 @@
                         habitations
                     </h1>
                     <button id="btn-cancel" type="button" class="btn btn-danger mb-4">Annuler</button>
+
+
                     <fieldset>
 
                         <legend>Ajouter une surveillance d'habitation</legend>

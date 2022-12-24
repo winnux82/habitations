@@ -1,33 +1,24 @@
 const Habitation = require('../models/habitation');
+const Agent = require('../models/agent');
+const Sequelize = require('sequelize');
+const { Op } = Sequelize;
 const catchAsync = require('../helpers/catchAsync');
 const moment = require('moment');
 
 const habitations = catchAsync(async (req, res) => {
+    let dateActuelle = moment(new Date()).format('YYYY-MM-DD HH:mm');
+
     const habitations = await Habitation.findAll({
-        // where: {
-        //     datedebut: {
-        //         [Habitation.lte]: moment(new Date()).format('YYYY/MM/DD HH:mm'),
-        //     },
-        //     datefin: {
-        //         [Habitation.gte]: moment(new Date()).format('YYYY/MM/DD HH:mm'),
-        //     },
-        // },
-        // where: {
-        //     datedebut: {
-        //         [Habitation.lte]: moment(new Date()).format('YYYY/MM/DD hh:mm'),
-        //     },
-        //     datefin: {
-        //         [Habitation.gte]: moment(new Date()).format('YYYY/MM/DD hh:mm'),
-        //     },
-        // },
+        where: {
+            datedebut: {
+                [Op.lte]: dateActuelle,
+            },
+            datefin: {
+                [Op.gte]: dateActuelle,
+            },
+        },
     });
 
-    // habitations.forEach((element) => {
-    //     console.log(element.datedebut + '------');
-    //     console.log(moment(new Date()).format('YYYY/MM/DD HH:mm'));
-    // });
-
-    //console.log('All habitations:', JSON.stringify(habitations, null, 2));
     res.render('habitations', {
         title: 'Listing des habitations',
         //Habitations
@@ -35,7 +26,16 @@ const habitations = catchAsync(async (req, res) => {
         errors: req.flash('error'),
     });
 });
+const habitationsAll = catchAsync(async (req, res) => {
+    const habitations = await Habitation.findAll({});
 
+    res.render('habitations', {
+        title: 'Listing des habitations',
+        //Habitations
+        habitations,
+        errors: req.flash('error'),
+    });
+});
 const getAll = catchAsync(async (req, res) => {
     const habitations = await Habitation.findAll()
         .then((habitations) => {
@@ -188,32 +188,55 @@ const fillForm = async (req, res) => {
     }
 };
 const habitationList = catchAsync(async (req, res) => {
-    const habitations = await Habitation.findAll({});
-
+    let dateActuelle = moment(new Date()).format('YYYY-MM-DD HH:mm');
+    const habitations = await Habitation.findAll({
+        where: {
+            datedebut: {
+                [Op.lte]: dateActuelle,
+            },
+            datefin: {
+                [Op.gte]: dateActuelle,
+            },
+        },
+    });
+    const agents = await Agent.findAll({});
     res.render('habitations-validation', {
         url: req.url,
         title: 'Validation des habitations',
         habitations,
+        agents,
         errors: req.flash('error'),
     });
 });
 const habitationListByLocality = catchAsync(async (req, res) => {
+    let dateActuelle = moment(new Date()).format('YYYY-MM-DD HH:mm');
     const localite = req.params.localite;
     const habitations = await Habitation.findAll({
         where: {
+            datedebut: {
+                [Op.lte]: dateActuelle,
+            },
+            datefin: {
+                [Op.gte]: dateActuelle,
+            },
             localite: localite,
         },
     });
+    const agents = await Agent.findAll({});
     //res.json({ habitations });
     res.render('habitations-validation', {
         url: req.url,
         title: 'Validation des habitations',
         habitations,
+        agents,
         errors: req.flash('error'),
     });
 });
+
 module.exports = {
     habitations,
+    habitationsAll,
+
     createHabitation,
     createHabitationForm,
     getAll,

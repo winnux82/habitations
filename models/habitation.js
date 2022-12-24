@@ -34,7 +34,7 @@ const Habitation = db.define(
             allowNull: true,
             get() {
                 return moment(this.getDataValue('datedebut')).format(
-                    'YYYY/MM/DD HH:mm'
+                    'YYYY-MM-DD HH:mm'
                 );
             },
         },
@@ -43,7 +43,7 @@ const Habitation = db.define(
             allowNull: true,
             get() {
                 return moment(this.getDataValue('datefin')).format(
-                    'YYYY/MM/DD HH:mm'
+                    'YYYY-MM-DD HH:mm'
                 );
             },
         },

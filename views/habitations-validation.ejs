@@ -49,50 +49,65 @@
             </div>
 
             <script>
-                // Store the selected radio button in a variable
-                let selectedRadio = null;
 
-                document.querySelectorAll('.radio').forEach(function (radio) {
-                    radio.addEventListener('click', function () {
+                $('.radio').each(function () {
+                    $(this).click(function () {
                         // Uncheck all radio buttons
-                        document.querySelectorAll('.radio').forEach(function (radio) {
-                            radio.checked = false;
-                        });
-                        // Check the clicked radio button
-                        this.checked = true;
-                        // Store the selected radio button
-                        selectedRadio = this;
+
                         // Redirect to the appropriate page
                         switch (this.id) {
                             case 'null':
                                 window.location = '/habitations/validation';
-                                selectedRadio.checked = true;
-                                console.log(selectedRadio.checked);
+                                this.checked = true;
+                                console.log(this.checked);
                                 break;
                             case 'mouscron':
                                 window.location = '/habitations/validation/Mouscron';
-                                selectedRadio.checked = true;
-                                console.log(selectedRadio.checked);
+                                this.checked = true;
+                                console.log(this.checked);
                                 break;
                             case 'dottignies':
                                 window.location = '/habitations/validation/Dottignies';
-                                selectedRadio.checked = true;
-                                console.log(selectedRadio.checked);
+                                this.checked = true;
+                                console.log(this.checked);
                                 break;
                             case 'luingne':
                                 window.location = '/habitations/validation/Luingne';
-                                selectedRadio.checked = true;
-                                console.log(selectedRadio.checked);
+                                this.checked = true;
+                                console.log(this.checked);
                                 break;
                             case 'herseaux':
                                 window.location = '/habitations/validation/Herseaux';
-                                selectedRadio.checked = true;
-                                console.log(selectedRadio.checked);
+                                this.checked = true;
+                                console.log(this.checked);
                                 break;
                         }
                     });
                 });
 
+                $(document).ready(function () {
+                    // Get the current page URL
+                    var currentURL = window.location.href;
+
+                    // Check the appropriate radio button based on the URL
+                    switch (currentURL) {
+                        case '/habitations/validation':
+                            $('#null').prop('checked', true);
+                            break;
+                        case '/habitations/validation/Mouscron':
+                            $('#mouscron').prop('checked', true);
+                            break;
+                        case '/habitations/validation/Dottignies':
+                            $('#dottignies').prop('checked', true);
+                            break;
+                        case '/habitations/validation/Luingne':
+                            $('#luingne').prop('checked', true);
+                            break;
+                        case '/habitations/validation/Herseaux':
+                            $('#herseaux').prop('checked', true);
+                            break;
+                    }
+                });
 
 
 
@@ -118,6 +133,7 @@
                     var color;
                     if(habitation.localite=='Mouscron'){
                     color='blue';
+
                     }
                     else if(habitation.localite=='Dottignies'){
                     color = 'green';
@@ -132,8 +148,9 @@
 
 
 
-                    <article class="postcard light <%=color%>">
-                        <a class="postcard__img_link" href="#">
+                    <article class="postcard light <%=color%> postcard-container animated-fade-in data-toggle=modal data-target=#myModal
+                    <%= habitation.id %>">
+                        <a class=" postcard__img_link" href="#">
                             <img class="postcard__img" src="/img/<%=habitation.localite%>.jpg" alt="Image Title" />
                         </a>
                         <div class="mypostcard">
@@ -156,28 +173,132 @@
 
                                     <i class="fas fa-user-alt"></i> Demandeur:
                                     <%= habitation.demandeur %>
-                                </div><br>
-                                <div class=" postcard__preview-txt">
-
-                                    <% let mesures=habitation.mesures %>
-                                        <%=mesures.split("-").join("\n"); %>
-
+                                </div>
+                                <div class="postcard__preview-txt" id="postcard__preview-txt"><br>
+                                    <i class="fas fa-users-cog"></i> Mesures:
+                                    <pre><% let mesures=habitation.mesures %><%=mesures.split("-").join("\n-"); %></pre>
                                 </div>
                                 <ul class="postcard__tagbox">
                                     <li class="tag__item"><i class="fas fa-tag mr-2"></i>
-                                        <%=habitation.localite%>
+                                        <%= habitation.localite %>
                                     </li>
-                                    <li class="tag__item"><i class="fas fa-clock mr-2"></i> x jours restant</li>
+                                    <li class="tag__item"><i class="fas fa-clock mr-2"></i>
+                                        <% // Créer un objet Date pour la date du jour et pour la date de fin const
+                                            today=new Date(); const dateFin=new Date(habitation.datefin); const
+                                            diff=dateFin.getTime() - today.getTime(); const diffInDays=Math.round(diff /
+                                            86400000); %>
+                                            <%= diffInDays %> jours restants
+                                    </li>
                                     <li class="tag__item play blue">
-                                        <a href="#"><i class="fas fa-play mr-2"></i> Valider l'habitation</a>
+                                        <i class="fas fa-play mr-2"></i> informations
                                     </li>
                                 </ul>
+                                <script>const toggleInformation = () => {
+                                        const informationElement = document.getElementById('postcard__preview-txt');
+                                        if (informationElement.style.display === 'none') {
+                                            informationElement.style.display = 'block';
+                                        } else {
+                                            informationElement.style.display = 'none';
+                                        }
+                                    };
+
+                                    const informationButton = document.querySelector('.tag__item.play.blue');
+                                    informationButton.addEventListener('click', toggleInformation);
+                                </script>
+                                <button type="button" class="btn btn-primary text-right" data-toggle="modal"
+                                    data-target="#myModal<%=habitation.id%>">
+                                    Valider l'habitation
+                                </button>
                             </div>
                         </div>
                     </article>
 
 
+                    <div class="modal fade" id="myModal<%=habitation.id%>" tabindex="-1" role="dialog"
+                        aria-labelledby="exampleModalLabel" aria-hidden="false">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+
+                                    <h5 class="modal-title" id="exampleModalLabel">Détails surveillance</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="false">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    <div class="informationHabitation">
+
+                                        <h5>ID : <%= habitation.id %>
+                                        </h5>
+                                        <b>Adresse : </b>
+                                        <%= habitation.adresse %><br>
+                                            <b>Localité : </b>
+                                            <%= habitation.localite %><br>
+                                                <b>Demandeur : </b>
+                                                <%= habitation.demandeur %><br>
+                                                    <b>Date départ : </b>
+                                                    <%= habitation.datedebut %><br>
+                                                        <b>Date retour : </b>
+                                                        <%= habitation.datefin %><br>
+                                                            <b>Mesures de sécurité: </b>
+                                                            <pre><%= habitation.mesures %><br></pre>
+                                                            <b>Véhicule: </b>
+                                                            <%= habitation.vehicule %><br>
+                                    </div><br>
+                                    <a href="https://www.google.com/maps/place/<%= habitation.adresse %>,+<%= habitation.cp %>+<%= habitation.localite %>"
+                                        target="_blank">
+                                        <img src="/img/googlemap100.png" alt="googlemap" width="50">
+                                    </a>
+                                    <h5>
+                                        <div class="barre horizontale">
+                                            _______________________________________________________</div>
+                                    </h5>
+                                    <div class="ValidationHabitation">
+                                        <form action="/habitations/validation" method="POST">
+                                            <h5><span class="label label-default">Matricule</span></h5>
+                                            <div class="input-group m-1">
+                                                <select name="agent" class="form-control">
+                                                    <option value="default" selected>Choisissez un agent</option>
+                                                    <% agents.forEach((Agent)=> { %>
+                                                        <option value="<%= Agent.matricule %>">
+                                                            <%= Agent.matricule %>
+                                                        </option>
+                                                        <% }) %>
+                                                </select>
+
+                                                <div class="adresse">
+                                                    <input type="hidden" name="adresse"
+                                                        value="<%= habitation.adresse %>">
+                                                </div>
+                                            </div>
+                                            <h5><span class="label label-default">Message : </span></h5>
+                                            <div class="mb-3"><textarea class="form-control" name="message"
+                                                    id="exampleFormControlTextarea1" rows="4"></textarea></div>
+
+                                            <input type="submit" name="bValiderHabitation" value="Valider"
+                                                class="btn btn-primary m-1">
+                                    </div>
+                                    </form>
+                                </div>
+
+
+
+                            </div>
+
+
+                        </div>
+
+                    </div>
+
+
+
+
+
                     <% }) %>
+
+
+
+
 
             </div>
         </div>
