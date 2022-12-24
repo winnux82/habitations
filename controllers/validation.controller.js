@@ -3,6 +3,7 @@ const catchAsync = require('../helpers/catchAsync');
 ('use strict');
 const nodemailer = require('nodemailer');
 const moment = require('moment');
+require('dotenv').config({ path: '.env.config' });
 
 const habitationValidation = async (req, res) => {
     const { agent, adresse, message } = req.body;
@@ -57,12 +58,12 @@ const habitationValidation = async (req, res) => {
 async function SendMail(dataSubject, dataMessage, dataHTML) {
     // create reusable transporter object using the default SMTP transport
     let transporter = nodemailer.createTransport({
-        host: 'smtp.hostinger.com',
-        port: 465,
+        host: MAIL_HOST,
+        port: MAIL_PORT_HOST,
         secure: true, // true for 465, false for other ports
         auth: {
-            user: 'contact@gdlp.be', // generated ethereal user
-            pass: 'Roulers69', // generated ethereal password
+            user: MAIL_USER, // generated ethereal user
+            pass: MAIL_PWD, // generated ethereal password
         },
     });
 

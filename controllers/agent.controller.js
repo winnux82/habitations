@@ -3,6 +3,7 @@ const catchAsync = require('../helpers/catchAsync');
 
 const agents = catchAsync(async (req, res) => {
     const agents = await Agent.findAll();
+    console.log('cocou');
 
     //console.log('All agents:', JSON.stringify(agents, null, 2));
 
