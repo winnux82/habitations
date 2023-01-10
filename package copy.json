@@ -5,7 +5,7 @@
     "main": "webpack.config.js",
     "scripts": {
         "watch": "webpack",
-        "start": "gulp dev",
+        "start": "nodemon ./bin/www",
         "dev": "nodemon ./bin/www",
         "build": "rm -rf dist && webpack --mode development",
         "test": "react-scripts test --env=jsdom",

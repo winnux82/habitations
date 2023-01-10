@@ -110,18 +110,14 @@ const getAll = catchAsync(async (req, res) => {
 const deleteValidation = catchAsync(async (req, res) => {
     const idValidation = req.params.id;
     try {
-        await Validation.destroy({ where: { id: idValidation } }).on(
-            'success',
-            //await Agent.destroy({ where: { id: idAgent } }).then(
-            res.header('Refresh', '1'),
-            res.redirect('/validations/')
-        );
+        await Validation.destroy({ where: { id: idValidation } });
+        res.redirect('/validations/');
     } catch (err) {
         console.log(err);
         req.flash('error', "Erreur lors de l'effacement de la validation");
-        return; //res.redirect('/habitations');
     }
 });
+
 module.exports = {
     habitationValidation,
     validations,
